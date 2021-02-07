@@ -7,39 +7,33 @@ const CalendarComponent = () => {
     const [days, setDays] = useState([]);
     const [value, setValue] = useState(new Date());
 
-    function onChange(nextValue){
-        var tmp = [];
-        setDays(days.concat(nextValue));
-        days.forEach(function(value){
-            console.log(value);
-            console.log(nextValue);
-            if(value.valueOf() === nextValue.valueOf){
-                
-            }else{
-                tmp.push(value);
+
+
+    function check_selected_days(nextValue){
+        var flag = -1;
+        for(var day in days){
+            if(days[day].valueOf() === nextValue.valueOf()){
+                console.log(day);
+                flag = day;
+                break;
             }
-        })
-        //setDays(tmp);
-        console.log(days);
-
-        
-//        if(days.includes(nextValue))
-//            alert('selected');
-//        else{
-//            setValue(nextValue);
-//            setDays(days.concat(nextValue));
-//            //console.log(days);
-//        }
-
+        }
+        if(flag===-1){
+            setDays(days.concat(nextValue));
+        }else{
+            var fore = days.splice(0, flag);
+            var back = days.splice(1, days.length);
+            var tmp = fore.concat(back);
+            setDays(tmp);
+        }
     }
     
-
     return (
         <div >
           
             <Calendar
                 className="calendar"
-                onChange={onChange} 
+                onChange={check_selected_days} 
                 // onClickDay={(value) => {
                 //     console.log(value);
                 //     setDays(days.concat(value));
