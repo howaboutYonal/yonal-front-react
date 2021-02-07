@@ -14,7 +14,17 @@
   margin-left: auto;
   margin-right: auto;
   width: 171px;
-  
+}
+
+.calendar{
+  position:relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wednesday{
+  color: #6e7e29;
+  background: #61dafb;
+  text-align: left;
 }
 
 .gray-background{

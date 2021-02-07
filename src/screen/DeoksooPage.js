@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-
+import React, { useState } from 'react';
+import CalendarComponent from './Deoksoo/CalendarComponent'
 
 const DeoksooPage = () => {
     return (
-        <div></div>
-
+        <div>
+            <CalendarComponent/>
+        </div>
     );
 }
 
