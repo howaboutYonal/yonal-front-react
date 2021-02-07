@@ -21,10 +21,8 @@
   margin-left: auto;
   margin-right: auto;
 }
-.wednesday{
-  color: #6e7e29;
-  background: #61dafb;
-  text-align: left;
+.selected_day{
+  color: #00ff15;
 }
 
 .gray-background{
