@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 
 const CalendarComponent = () => {
     const [days, setDays] = useState([]);
-    const [value, setValue] = useState(new Date(1612768736107));
+    const [value, setValue] = useState(new Date());
+    const [test, setTest] = useState([
+        {
+            customers:""
+        }
+    ]);
+
+    useEffect(() =>{
+        callApi()
+            .then(res => setTest({customers: res}))
+            .catch(err => console.log(err));
+    },[]);
+
+    async function callApi(){
+        const response = await fetch('/api/customers');
+        const body = await response.json();
+        return body;
+    };
 
     function check_selected_days(nextValue){
         var flag = -1;
@@ -42,6 +59,7 @@ const CalendarComponent = () => {
                 tileClassName={tileClassName}
             />
             <p>{days.map(x=> x.valueOf())}</p>
+            <p>{test.customers ? test.customers.map(x => console.log(x)) : ""}</p>
         </div>
     );
 }

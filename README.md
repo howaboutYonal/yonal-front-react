@@ -21,4 +21,8 @@
 3. npm install express
 4. npm install -g express (그냥 -g로 해도 될텐데 댓글에선 암튼 이렇게함)
 5. npm install body-parser
-위 과정 후에 node server.js 이후 chrome에서 localhost:5000 ㄱㄱ
+- 위 과정 후에 node server.js 이후 chrome에서 localhost:5000 ㄱㄱ
+
+- 프론트 개발 하실거면, cd 후에 yarn client ㄱㄱ
+- 서버랑 같이 개발할거면 yarn dev ㄱㄱ
+- localhost:3000 포트는 client측, 5000포트는 server측임
