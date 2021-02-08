@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar, { MonthView} from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import './calendar.css';
 
 const CalendarComponent = () => {
     const [days, setDays] = useState([]);
@@ -35,7 +36,7 @@ const CalendarComponent = () => {
             <Calendar
                 className="calendar"
                 onChange={check_selected_days} 
-                value={value}
+                //value={value}
                 minDate={new Date()}
                 tileClassName={tileClassName}
             />

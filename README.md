@@ -6,3 +6,5 @@
 
 - css는 어떻게 취합하는 게 좋을 지 모르겠네 전부 App.css에 추가하는게 맞는건가?
   ㄴ (ㄷㅅ)흐음.. 일단은 그래도 될듯? 
+
+- 첨부된 deoksoocss.txt파일에 내용을 node_modules/react-calendar/dist/Calendar.css파일에 복사 붙여넣기 하세요!!
