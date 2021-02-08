@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Calendar, { MonthView} from 'react-calendar';
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 
@@ -9,6 +9,7 @@ const CalendarComponent = () => {
 
     function check_selected_days(nextValue){
         var flag = -1;
+        if(nextValue.valueOf() === value.valueOf()) return;
         for(var day in days){
             if(days[day].valueOf() === nextValue.valueOf()){
                 flag = day;
@@ -36,8 +37,8 @@ const CalendarComponent = () => {
             <Calendar
                 className="calendar"
                 onChange={check_selected_days} 
-                //value={value}
-                minDate={new Date()}
+                value={value}
+                minDate={value}
                 tileClassName={tileClassName}
             />
         </div>
