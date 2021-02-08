@@ -8,6 +8,7 @@
   ㄴ (ㄷㅅ)흐음.. 일단은 그래도 될듯? 
 
 - 첨부된 deoksoocss.txt파일에 내용을 node_modules/react-calendar/dist/Calendar.css파일에 복사 붙여넣기 하세요!!
+(모듈에 있는 css파일 변경은 깃으로 올릴수가 읍음...)
 
 - express서버 실행방법, cmd에서 node server.js
 
@@ -20,3 +21,4 @@
 3. npm install express
 4. npm install -g express (그냥 -g로 해도 될텐데 댓글에선 암튼 이렇게함)
 5. npm install body-parser
+위 과정 후에 node server.js 이후 chrome에서 localhost:5000 ㄱㄱ
