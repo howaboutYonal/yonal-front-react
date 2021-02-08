@@ -8,3 +8,15 @@
   ㄴ (ㄷㅅ)흐음.. 일단은 그래도 될듯? 
 
 - 첨부된 deoksoocss.txt파일에 내용을 node_modules/react-calendar/dist/Calendar.css파일에 복사 붙여넣기 하세요!!
+
+- express서버 실행방법, cmd에서 node server.js
+
+- pull받은 후에는 node_modules폴더가 없을 것입니다. 아래의 방법을 사용하면 될듯?
+
+- 동빈나 7강 'node.js express서버 개발환경 구축하기'에서 오류가 있습니다. 
+댓글에서 나온 해결방법.
+1. npm install nodemon (=> 노드모듈 설치)
+2. npm install -g nodemon
+3. npm install express
+4. npm install -g express (그냥 -g로 해도 될텐데 댓글에선 암튼 이렇게함)
+5. npm install body-parser

@@ -5,7 +5,7 @@ import './calendar.css';
 
 const CalendarComponent = () => {
     const [days, setDays] = useState([]);
-    const [value, setValue] = useState(new Date());
+    const [value, setValue] = useState(new Date(1612768736107));
 
     function check_selected_days(nextValue){
         var flag = -1;
@@ -41,6 +41,7 @@ const CalendarComponent = () => {
                 minDate={value}
                 tileClassName={tileClassName}
             />
+            <p>{days.map(x=> x.valueOf())}</p>
         </div>
     );
 }
