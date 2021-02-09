@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
 
-/*  사용자가 참여 가능한 날짜를 선택할 수 있는 달력 컴포넌트
-    사용자가 날짜를 선택하면 해당 날짜가 days에 date형식으로 저장된다.
-    이어서 버튼을 누르면, days에 저장된 데이터가 db로 업로드된다. */
+/*  참여한 모든 유저의 date데이터를 api로 불러온다.
+    이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
 
-const CalendarComponent = () => {
+const Total_Calendar = () => {
     const [days, setDays] = useState([]);
     const [value, setValue] = useState(new Date());
-    // const [test, setTest] = useState([
-    //     {
-    //         customers:""
-    //     }
-    // ]);
+    const [test, setTest] = useState([
+        {
+            customers:""
+        }
+    ]);
 
-    // useEffect(() =>{
-    //     callApi()
-    //         .then(res => setTest({customers: res}))
-    //         .catch(err => console.log(err));
-    // },[]);
+    useEffect(() =>{
+        callApi()
+            .then(res => setTest({customers: res}))
+            .catch(err => console.log(err));
+    },[]);
 
-    // async function callApi(){
-    //     const response = await fetch('/api/customers');
-    //     const body = await response.json();
-    //     return body;
-    // };
+    async function callApi(){
+        const response = await fetch('/api/user');
+        const body = await response.json();
+        return body;
+    };
 
     function check_selected_days(nextValue){
         var flag = -1;
@@ -56,7 +54,7 @@ const CalendarComponent = () => {
     
     return (
         <div>
-            <h1>가능한 날짜</h1>
+            <h1>종합된 날짜</h1>
             <Calendar
                 className="calendar"
                 onChange={check_selected_days} 
@@ -65,12 +63,9 @@ const CalendarComponent = () => {
                 tileClassName={tileClassName}
             />
             <p>{days.map(x=> x.valueOf())}</p>
-            {/* <p>{test.customers ? test.customers.map(x => console.log(x)) : ""}</p> */}
-            <Link to='/totalcal'>
-                <button className = 'btn'>YONAL</button>
-            </Link>
+            <p>{test.customers ? test.customers.map(x => console.log(x)) : ""}</p>
         </div>
     );
 }
 
-export default CalendarComponent;
+export default Total_Calendar;

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import CalendarComponent from './Deoksoo/CalendarComponent'
-import ButtonComponent from './Deoksoo/ButtonComponent'
+import React from 'react';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
+import CalendarComponent from './Deoksoo/CalendarComponent';
+import Total_Calendar from './Deoksoo/Total_Calendar';
 
 const DeoksooPage = () => {
     return (
-        <div>
-            <div className='logoText'>가능한 날짜</div>
-            <CalendarComponent/>
-            <ButtonComponent/>
-        </div>
+
+        <BrowserRouter>
+            <Route path="/deoksoo" component={CalendarComponent}/>
+            <Route path="/totalcal" component={Total_Calendar}/>
+        </BrowserRouter>
+
     );
 }
 
