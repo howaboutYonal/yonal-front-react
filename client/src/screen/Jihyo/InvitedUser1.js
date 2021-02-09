@@ -1,12 +1,29 @@
-import React, { Component } from 'react';
-import InputName from "../../component/InputName";
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom'
 
 
 const InvitedUser1 = () => {
+    const [nickname, setNickname] = useState('wlgy');
+    const onSubmit = () => {
+        alert({nickname});
+    }
+    const getObject = () => {
+        return `{{pathname: '/2', nickname: ${nickname}}}`;
+    } 
+    console.log(nickname);
+
     return (
         <div>
-            <h3> 별명 입력하기 </h3>
-            <InputName/>
+            <form>
+                <label>
+                    별명:
+                    <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder = "별명" />
+                </label>
+
+                <Link to={{pathname: '/2', nickname: nickname}}>
+                    <input type="submit" value="확인" className="btn" onSubmit={onSubmit}/>
+                </Link>
+            </form>
         </div>
     );
 }
