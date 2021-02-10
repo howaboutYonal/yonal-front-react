@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
@@ -10,7 +10,7 @@ import './calendar.css';
 
 const CalendarComponent = () => {
     const [days, setDays] = useState([]);
-    const [value, setValue] = useState(new Date());
+    const [value, ] = useState(new Date());
     // const [test, setTest] = useState([
     //     {
     //         customers:""

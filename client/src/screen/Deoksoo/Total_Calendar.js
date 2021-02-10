@@ -7,8 +7,8 @@ import './calendar.css';
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
 
 const Total_Calendar = () => {
-    const [days, setDays] = useState([]);
-    const [value, setValue] = useState(new Date());
+    //const [] = useState([]);
+    const [value, ] = useState(new Date());
     const [test, setTest] = useState([
         {
             customers:""
