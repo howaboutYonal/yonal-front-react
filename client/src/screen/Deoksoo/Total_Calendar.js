@@ -7,8 +7,7 @@ import './calendar.css';
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
 
 const Total_Calendar = () => {
-    const [days, setDays] = useState([]);
-    const [value, setValue] = useState(new Date());
+    const [value, ] = useState(new Date());
     const [test, setTest] = useState([
         {
             customers:""
@@ -27,42 +26,20 @@ const Total_Calendar = () => {
         return body;
     };
 
-    // function check_selected_days(nextValue){
-    //     var flag = -1;
-    //     if(nextValue.valueOf() === value.valueOf()) return;
-    //     for(var day in days){
-    //         if(days[day].valueOf() === nextValue.valueOf()){
-    //             flag = day;
-    //             break;
-    //         }
-    //     }
-    //     if(flag===-1){
-    //         setDays(days.concat(nextValue));
-    //     }else{
-    //         var fore = days.splice(0, flag);
-    //         var back = days.splice(1, days.length);
-    //         var tmp = fore.concat(back);
-    //         setDays(tmp);
-    //     }
-    // }
-
     function tileClassName(params){
         if(params.view === 'month' && !(test.customers.length ===0))
-            if(test.customers.some(x => x.selectedday === params.date.valueOf()))
-                return 'selected_day'
+            if(test.customers.some(x => x.selectedday === params.date.valueOf().toString()))
+                return 'selected_day';
     }
     
     return (
         <div>
             <h1>종합된 날짜</h1>
-            <Calendar
-                className="calendar"
-//                onChange={check_selected_days} 
-                value={value}
-                minDate={value}
-                tileClassName={test.customers ? tileClassName : ""}
-            />
-            <p>{test.customers ? test.customers.map(x => console.log(x)) : ""}</p>
+            {test.customers ? 
+            <Calendar className="calendar"
+            value = {value}
+            minDate = {value}
+            tileClassName = {tileClassName} /> : ""}
         </div>
     );
 }
