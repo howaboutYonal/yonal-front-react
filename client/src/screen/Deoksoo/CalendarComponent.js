@@ -11,23 +11,6 @@ import './calendar.css';
 const CalendarComponent = () => {
     const [days, setDays] = useState([]);
     const [value, ] = useState(new Date());
-    // const [test, setTest] = useState([
-    //     {
-    //         customers:""
-    //     }
-    // ]);
-
-    // useEffect(() =>{
-    //     callApi()
-    //         .then(res => setTest({customers: res}))
-    //         .catch(err => console.log(err));
-    // },[]);
-
-    // async function callApi(){
-    //     const response = await fetch('/api/customers');
-    //     const body = await response.json();
-    //     return body;
-    // };
 
     function check_selected_days(nextValue){
         var flag = -1;
@@ -65,7 +48,6 @@ const CalendarComponent = () => {
                 tileClassName={tileClassName}
             />
             <p>{days.map(x=> x.valueOf())}</p>
-            {/* <p>{test.customers ? test.customers.map(x => console.log(x)) : ""}</p> */}
             <Link to='/totalcal'>
                 <button className = 'btn'>YONAL</button>
             </Link>
