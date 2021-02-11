@@ -34,3 +34,16 @@
 - user 테이블은 id, name, selectedday로 이루어짐
 - 동빈나 11강 강의를 바탕으로 server.js생성
 - rds이용을 위해서는 동빈나 11강 강의에 나온 database.json파일 생성이 필요합니다. 해당 파일은 .gitignore에 추가되어 깃에 올라가지 않기 때문에 개별 생성이 필요.
+
+
+
+### 지효 RDS 연결
+- SEQUELIZE라고 DB의 객체 맵핑 해주는 모듈 설치함
+- dotenv 설치
+이런거 npm install 하면 저절로 설치되겠지?
+
+- ".env" 파일 gitignore에 추가함
+=> 제일 바깥에 .env 만들어 환경변수를 추가한다.
+
+내용은 notion에 올려놓도록 하겠음
+

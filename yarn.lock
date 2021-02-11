@@ -90,6 +90,23 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@types/bluebird@^3.5.26":
+  version "3.5.33"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.33.tgz#d79c020f283bd50bd76101d7d300313c107325fc"
+  integrity sha512-ndEo1xvnYeHxm7I/5sF6tBvnsA4Tdi3zj1keRKRs12SP+2ye2A27NDJ1B6PqkfMbGAcT+mqQVqbZRIrhfOp5PQ==
+
+"@types/mysql@^2.15.2":
+  version "2.15.17"
+  resolved "https://registry.yarnpkg.com/@types/mysql/-/mysql-2.15.17.tgz#18b9a64b3c83916e768cf0c1bd7469f7ecbb7484"
+  integrity sha512-5vlnAFgdjFGqu3fHbd+pp+qL9mMty6c/N65TjsT5H+kfet50Qq4tXWMrD5lm/ftXeiEQwbAndZepB/eaLGaTew==
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*":
+  version "14.14.25"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.25.tgz#15967a7b577ff81383f9b888aa6705d43fbbae93"
+  integrity sha512-EPpXLOVqDvisVxtlbvzfyqSsFeQxltFbluZNRndIb8tr9KiBnYNLzrc1N3pyKUCww2RNrfHDViqDWWE1LCJQtQ==
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -181,6 +198,11 @@ binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
+
+bluebird@^3.5.1:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
+  integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
 
 body-parser@1.19.0, body-parser@^1.19.0:
   version "1.19.0"
@@ -1267,6 +1289,16 @@ process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
+
+promise-mysql@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/promise-mysql/-/promise-mysql-5.0.2.tgz#3310c86ce85b885d319a7379e350234c6324ce5a"
+  integrity sha512-XrGj2kFf/gUWoIrxxpnb9RedEh+SBIp3BOM7Mq6h36XkmT94x5KeI34BCp5wCkTB5rKx1yrq9rnYTfJhN1yjNQ==
+  dependencies:
+    "@types/bluebird" "^3.5.26"
+    "@types/mysql" "^2.15.2"
+    bluebird "^3.5.1"
+    mysql "^2.18.1"
 
 prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
