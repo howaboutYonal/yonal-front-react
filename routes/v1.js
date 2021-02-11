@@ -1,28 +1,35 @@
 const express = require('express');
-const url = require('url');
-const fs = require('fs');
 const router = express.Router();
+const { User, Project, ProjectUser,VoteData } = require('../models');
+/*
+url 예시
+localhost:5000/v1/user
+*/
 
-const {  User } = require('../models');
+//TEST: user length
+router.post('/user', async (req, res)=>{
+    try {
+        const users = await User.findAll();
 
+        console.log(users.length);
 
-router.get('/api/user',(req, res)=>{
-
-    connection.query(
-        "SELECT * FROM USER",
-        (err, rows, fields) =>{
-            res.send(rows);
-        }
-    );
-
+        return res.json({
+            code: 200,
+            payload: JSON.stringify(users),
+        });
+  
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
 });
 
-
-
-//정상작동함
+//정상작동하는지 check
 router.use('/check',(req,res)=>{
     try {
-              
         console.log('hi');
         
         return res.json({
@@ -76,3 +83,5 @@ router.post('/user/register', async (req, res) => {
         });
     }
 });
+
+module.exports = router

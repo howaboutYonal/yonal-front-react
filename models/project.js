@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 
-module.exports = class User extends Sequelize.Model{
+module.exports = class Project extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            userId: {
+            projectId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 unique: true,
@@ -14,20 +14,28 @@ module.exports = class User extends Sequelize.Model{
                 type: Sequelize.STRING(20),
                 allowNull: false,
             },
-            email:{
-                type: Sequelize.STRING(50),
+            startDate:{
+                type: Sequelize.DATE,
                 allowNull: true 
             },
-            pw:{
-                type: Sequelize.STRING(20),
+            endDate:{
+                type: Sequelize.DATE,
+                allowNull: true 
+            },
+            shareLink:{
+                type: Sequelize.STRING(100),
+                allowNull: true 
+            },
+            inviteLink:{
+                type: Sequelize.STRING(100),
                 allowNull: true 
             },
             }, {
                 sequelize,
-                timestamps: false,
+                timestamps: true,
                 underscored: false,
-                modelName: 'User',
-                tableName: 'user',
+                modelName: 'Project',
+                tableName: 'project',
                 paranoid: true,
                 charset: 'utf8',
                 collate: 'utf8_general_ci',
@@ -35,6 +43,5 @@ module.exports = class User extends Sequelize.Model{
     };
     
     static associate(db){
-
     }
 };

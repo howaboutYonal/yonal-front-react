@@ -1,33 +1,24 @@
 const Sequelize = require('sequelize');
 
-module.exports = class User extends Sequelize.Model{
+module.exports = class VoteData extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            userId: {
+            id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 unique: true,
-                autoIncrement: true,
                 primaryKey:true,
             },
-            name: {
-                type: Sequelize.STRING(20),
+            date: {
+                type: Sequelize.DATE,
                 allowNull: false,
-            },
-            email:{
-                type: Sequelize.STRING(50),
-                allowNull: true 
-            },
-            pw:{
-                type: Sequelize.STRING(20),
-                allowNull: true 
-            },
+            }
             }, {
                 sequelize,
                 timestamps: false,
                 underscored: false,
-                modelName: 'User',
-                tableName: 'user',
+                modelName: 'VoteData',
+                tableName: 'voteData',
                 paranoid: true,
                 charset: 'utf8',
                 collate: 'utf8_general_ci',
@@ -35,6 +26,5 @@ module.exports = class User extends Sequelize.Model{
     };
     
     static associate(db){
-
     }
 };

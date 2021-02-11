@@ -1,40 +1,42 @@
 const Sequelize = require('sequelize');
 
-module.exports = class User extends Sequelize.Model{
+module.exports = class ProjectUser extends Sequelize.Model{
     static init(sequelize){
         return super.init({
-            userId: {
+            id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 unique: true,
                 autoIncrement: true,
                 primaryKey:true,
             },
-            name: {
-                type: Sequelize.STRING(20),
+            projectId: {
+                type: Sequelize.INTEGER,
                 allowNull: false,
             },
-            email:{
-                type: Sequelize.STRING(50),
-                allowNull: true 
+            userId:{
+                type: Sequelize.INTEGER,
+                allowNull: false,
             },
-            pw:{
-                type: Sequelize.STRING(20),
-                allowNull: true 
-            },
+            isManager: {
+                type: Sequelize.TINYINT(1),
+                allowNull: false,
+            }
             }, {
                 sequelize,
                 timestamps: false,
                 underscored: false,
-                modelName: 'User',
-                tableName: 'user',
+                modelName: 'ProjectUser',
+                tableName: 'project-user',
                 paranoid: true,
                 charset: 'utf8',
                 collate: 'utf8_general_ci',
         });
     };
-    
-    static associate(db){
 
+    static associate(db){
+        // db.ProjectUser.belongsToMany(db.User,{
+        //     through: 'projectUser', 
+        // });
     }
 };
