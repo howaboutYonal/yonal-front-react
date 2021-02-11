@@ -12,17 +12,17 @@ function App() {
       <BrowserRouter>
 
         <Link to='./jihyo'>
-              <button className = 'btn'>지효</button>
+              <button className = 'indexBtn'>지효</button>
         </Link>
 
         <Link to='./suebeen'>
-              <button className = 'btn'>수빈</button>
+              <button className = 'indexBtn'>수빈</button>
         </Link>
 
         <Link to='./deoksoo'>
-              <button className = 'btn'>덕수</button>
+              <button className = 'indexBtn'>덕수</button>
         </Link>
-        <div>--------------------------------------------------------</div>
+        <div>--------------------------------------</div>
         <Route path="/jihyo" component={JihyoPage}/>
         <Route path="/suebeen" component={SuebeenPage}/>
         <Route path="/deoksoo" component={DeoksooPage}/>

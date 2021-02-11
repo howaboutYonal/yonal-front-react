@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-family: "Consolas";
+  font-family: "Noto Sans KR";
 }
 
 .App-logo {
@@ -16,19 +16,11 @@
   width: 171px;
 }
 
-.gray-background{
-  width: 200px;
-  position:relative;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 
-  background: rgba(228, 228, 228, 0.47);
-}
 
 .logoText{
   position: relative;
-  margin-top: 20px;
+  margin-top: 50px;
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: 500;
@@ -38,6 +30,51 @@
   
   color: #000000;
 }
+
+.gray-background{
+  width: 90%;
+  position:absolute;
+  margin-top: 20%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  background: rgba(228, 228, 228, 0.47);
+}
+
+
+.descriptionLine{
+  margin-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/*프로젝트 이름, 현재 참여 인원, 매칭 일정 아이콘*/
+.descriptionIcon{
+  float: left;
+  clear: left;
+  width: 25px;
+  margin-right: 10px;
+}
+
+/*프로젝트 이름, 현재 참여 인원, 매칭 일정*/
+.descriptionTitle{
+  position: relative;
+  font-weight: 550;
+  font-size: 15px;
+  text-align: left;
+  color: #000000;
+}
+
+.descriptionContent{
+  font-weight: 300;
+  font-size: 15px;
+  margin-right: 10px;
+  position: relative;
+  text-align: right;
+
+}
+
 .inputGuide{
   color: #000;
   margin-bottom: 4px;
@@ -51,16 +88,34 @@
   border-width: 1px;
 }
 
+.indexBtn{
+  background-color:#f0f0f0;
+  border-radius:13px;
+  border: 0;
+	cursor:pointer;
+  color:#000000;
+  margin: 5vmax;
+  padding: 3px 10px;
+  margin: 5px 5px;
+  margin-block: 10px;
+  font-size:15px;
+	text-decoration:none;
+}
+
 .btn {
 	background-color:#FF705D;
   border-radius:13px;
   border: 0;
 	cursor:pointer;
   color:#ffffff;
-  margin: 5vmax;
+  margin: 5%;
   font-size:15px;
 	padding:6px 33px;
 	text-decoration:none;
+  position: fixed;
+  width: 90%;
+  left: 0;
+  bottom: 30px;
 }
 
 .btn:hover {
@@ -68,12 +123,43 @@
 }
 .btn:active {
   border: 0;
-  position:relative;
+  position:fixed;
 	top:0.5px;
 }
 .btn:focus {
   border: none;
   outline: none;
+}
+
+/*"닉네임을 입력해주세요"*/
+.nicknameGuide{
+  text-align: left;
+  margin-top: 30%;
+  margin-left: 23px;
+  line-height: 26px;
+}
+
+/*input 박스*/
+.inputField{
+  margin-top: 40%;
+  border: 0;
+  outline: 0;
+  font-size: large;
+  background: transparent;
+  width: 90%;
+  border-bottom: 4px solid #FF705D;
+}
+
+
+.rectangle{
+  position: absolute;
+  width: 327px;
+  height: 3px;
+  left: 24px;
+  top: 389px;
+
+  margin: 0px;
+  background: #FF705D;
 }
 
 @media (prefers-reduced-motion: no-preference) {
