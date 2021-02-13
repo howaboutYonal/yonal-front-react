@@ -6,7 +6,7 @@ import './calendar.css';
 /*  참여한 모든 유저의 date데이터를 api로 불러온다.
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
 
-const Total_Calendar = () => {
+const Result = () => {
     const [value, ] = useState(new Date());
     const [test, setTest] = useState([
         {
@@ -44,4 +44,4 @@ const Total_Calendar = () => {
     );
 }
 
-export default Total_Calendar;
+export default Result;

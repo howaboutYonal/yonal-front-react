@@ -1,12 +1,15 @@
 import './App.css';
 import {BrowserRouter, Route, Link} from 'react-router-dom'
-import JihyoPage from './screen/JihyoPage'
-import DeoksooPage from './screen/DeoksooPage'
-import yonal_logo from './screen/yonal_logo.png'
+import InvitedHome from './screen/InvitedHome'
+import Result from './screen/Result'
+import yonal_logo from './image/yonal_logo.png'
 import HomePage from './screen/HomePage'
 import CreateProject from './screen/CreateProject'
 import GoogleButton from './component/GoogleButton'
 import CopyLink from './screen/CopyLink'
+import Guest from './screen/Guest'
+import Vote from './screen/Vote'
+import CalendarComponent from './screen/CalendarComponent';
 
 function App() {
   return (
@@ -21,15 +24,18 @@ function App() {
         <Link to='./home'>
           <button className = 'indexBtn'>홈페이지</button>
         </Link>
-        <Link to='./deoksoo'>
-              <button className = 'indexBtn'>덕수</button>
+        <Link to='./totalcal'>
+              <button className = 'indexBtn'>투표결과</button>
         </Link>
         <Route path="/" component={this}/>
-        <Route path="/jihyo" component={JihyoPage}/>
-        <Route path="/deoksoo" component={DeoksooPage}/>
+        <Route path="/invited" component={InvitedHome}/>
+        <Route path="/totalcal" component={Result}/>
         <Route path="/home" component={HomePage}/>
         <Route path="/create" component={CreateProject}/>
         <Route path="/copylink" component={CopyLink}/>
+        <Route path="/guest" component={Guest}/>
+        <Route path="/vote" component={Vote}/>
+        <Route path='/calendar' component={CalendarComponent}/>
       </BrowserRouter>
     </div>
   

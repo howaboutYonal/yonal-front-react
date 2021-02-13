@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom'
-import BoxDescription from '../../component/BoxDescription'
-import icon_plan from './yonal_icon_plan.png'
-import icon_people from './yonal_icon_people.png'
-import icon_calendar from './yonal_icon_calendar.png'
+import {Link} from 'react-router-dom'
+import BoxDescription from '../component/BoxDescription'
+import icon_plan from '../image/yonal_icon_plan.png'
+import icon_people from '../image/yonal_icon_people.png'
+import icon_calendar from '../image/yonal_icon_calendar.png'
 
 
-
-const InvitedHome = () => {
+const InvitedHome = ({location}) => {
     const [projectTitle, setProjectTitle] = useState('덕수빈지효');
     const [memberNum, setMemberNum] = useState('3');
     const [projectDate, setProjectDate] = useState('2021.01.02 - 2021.02.28');
@@ -23,7 +22,7 @@ const InvitedHome = () => {
                 
             </div>
 
-            <Link to='./1'>
+            <Link to='./guest'>
                 <button className = 'btn'>입장하기</button>
             </Link>
         </div>

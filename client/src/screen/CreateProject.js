@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
       flexWrap: 'wrap',
     },
     textField: {
-      width: 200,
+      width: 400,
     },
   }));
   
@@ -27,6 +27,7 @@ function getTimeStamp() {
 }
 
 const CreateProject = () => {
+    
     const classes = useStyles();
     const [name, setName] = useState('');
     const [startDate, setStartDate] = useState(getTimeStamp());
@@ -34,15 +35,25 @@ const CreateProject = () => {
 
     return (
         <div>
-            <TextField id="standard-basic" label="프로젝트 이름" value={name} onChange={(e) => setName(e.target.value)} />
+            <TextField 
+                id="name"
+                label="프로젝트 이름"
+                className={classes.textField}
+                error={name === "" ? true : false}
+                helperText="이름을 입력해주세요"
+                value={name}
+                onChange={(e) => setName(e.target.value)} 
+            />
 
             <br></br>
             <div className='period'>
                 start date
                 <form className={classes.container} noValidate>
                     <TextField
-                        id="date"
+                        id="startdate"
                         type="date"
+                        error={startDate < getTimeStamp() ? true : false}
+                        helperText="현재 날짜보다 전날을 선택할 수 없습니다"
                         className={classes.textField}
                         value={startDate} 
                         onChange={(e) => setStartDate(e.target.value)}
@@ -54,8 +65,10 @@ const CreateProject = () => {
                 end date
                 <form className={classes.container} noValidate>
                     <TextField
-                        id="date"
+                        id="enddate"
                         type="date"
+                        error={startDate > endDate ? true : false}
+                        helperText="시작 날짜 이후의 날짜를 선택하세요"
                         className={classes.textField}
                         value={endDate} 
                         onChange={(e) => setEndDate(e.target.value)}
@@ -64,10 +77,13 @@ const CreateProject = () => {
                         }}
                     />
                 </form>
+                
             </div>
+            
             <Link to={{pathname: './copylink', value: name + startDate + endDate}}>
-              <button className = 'indexBtn' >확인</button>
-            </Link>            
+                <button className = 'indexBtn' disabled={false}>확인</button>
+            </Link>
+         
         </div>
     );
 }

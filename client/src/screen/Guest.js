@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
-import yonal_logo from '../yonal_logo.png'
 
-
-const InvitedUser1 = () => {
+const Guest = () => {
     const [nickname, setNickname] = useState('');
     const onSubmit = () => {
         alert({nickname});
     }
     const getObject = () => {
-        return `{{pathname: '/2', nickname: ${nickname}}}`;
+        return `{{pathname: '/vote', nickname: ${nickname}}}`;
     } 
     console.log(nickname);
 
@@ -19,11 +17,11 @@ const InvitedUser1 = () => {
                 <label>
                     <input className= "inputField" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder = "별명" />
                 </label>
-                <Link to={{pathname: '/2', nickname: nickname}}>
+                <Link to={{pathname: '/vote', nickname: nickname}}>
                     <input type="submit" value="확인" className="btn" onSubmit={onSubmit}/>
                 </Link>
         </div>
     );
 }
 
-export default InvitedUser1;
+export default Guest;
