@@ -6,6 +6,7 @@ import yonal_logo from './screen/yonal_logo.png'
 import HomePage from './screen/HomePage'
 import CreateProject from './screen/CreateProject'
 import GoogleButton from './component/GoogleButton'
+import CopyLink from './screen/CopyLink'
 
 function App() {
   return (
@@ -20,9 +21,6 @@ function App() {
         <Link to='./home'>
           <button className = 'indexBtn'>홈페이지</button>
         </Link>
-        <Link to='./jihyo'>
-              <button className = 'indexBtn'>지효</button>
-        </Link>
         <Link to='./deoksoo'>
               <button className = 'indexBtn'>덕수</button>
         </Link>
@@ -31,6 +29,7 @@ function App() {
         <Route path="/deoksoo" component={DeoksooPage}/>
         <Route path="/home" component={HomePage}/>
         <Route path="/create" component={CreateProject}/>
+        <Route path="/copylink" component={CopyLink}/>
       </BrowserRouter>
     </div>
   
