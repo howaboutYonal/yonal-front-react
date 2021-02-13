@@ -15,7 +15,6 @@ const InvitedUser1 = () => {
 
     return (
         <div>
-            <img className='Applogo' src={yonal_logo}/>     
             <h3 className='nicknameGuide'>별명을 입력해주세요.</h3>
                 <label>
                     <input className= "inputField" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder = "별명" />
