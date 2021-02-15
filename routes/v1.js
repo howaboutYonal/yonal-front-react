@@ -48,10 +48,11 @@ router.use('/check',(req,res)=>{
 });
 
 // 프로젝트 매칭 결과 (req: project_id -> res: votedata, user)
-router.get('/get-result/:project_id', async (req, res) =>{
+router.post('/get/project-result', async (req, res) =>{
+    const project_id = req.body;
     const projectuser_id_userid = await ProjectUser.findAll({
         attributes:['id', 'userId'],
-        where:{projectId: req.params.project_id}
+        where:{projectId: project_id}
     });
     if (!projectuser_id_userid){
         return res.status(202).json({
@@ -83,7 +84,7 @@ router.get('/get-result/:project_id', async (req, res) =>{
 });
 
 //신규 유저 등록하기 (관리자)
-router.post('/user/register', async (req, res) => {
+router.post('/register/user-login', async (req, res) => {
     const { user_email, user_pw } = req.body;
     try {
         
