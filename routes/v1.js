@@ -48,7 +48,7 @@ router.use('/check',(req,res)=>{
 });
 
 // 프로젝트 매칭 결과 (req: project_id -> res: votedata, user)
-router.get('/:project_id/get/result', async (req, res) =>{
+router.get('/get-result/:project_id', async (req, res) =>{
     const projectuser_id_userid = await ProjectUser.findAll({
         attributes:['id', 'userId'],
         where:{projectId: req.params.project_id}
