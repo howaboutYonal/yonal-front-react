@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { Project } = require('.');
 
 module.exports = class ProjectUser extends Sequelize.Model{
     static init(sequelize){
@@ -13,10 +14,18 @@ module.exports = class ProjectUser extends Sequelize.Model{
             projectId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                references:{
+                    model:'project',
+                    key:'projectId'
+                }
             },
             userId:{
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                references:{
+                    model:'user',
+                    key:'userId'
+                }
             },
             isManager: {
                 type: Sequelize.TINYINT(1),
@@ -35,8 +44,7 @@ module.exports = class ProjectUser extends Sequelize.Model{
     };
 
     static associate(db){
-        // db.ProjectUser.belongsToMany(db.User,{
-        //     through: 'projectUser', 
-        // });
+        db.Project.belongsToMany(db.User, {through: 'ProjectUser'});
+        db.User.belongsToMany(db.Project, {through: 'ProjectUser'});
     }
 };

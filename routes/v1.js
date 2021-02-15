@@ -83,6 +83,31 @@ router.post('/get/project-result', async (req, res) =>{
     })
 });
 
+
+// //링크 타고온 new user 저장
+// router.post('/link/nickname', async (req, res) => {
+//     const { projectId, user_nickname } = req.body;
+//     try {
+        
+//         //같은 프로젝트에 닉네임 중복체크
+//         let user = await ProjectUser.findOne({
+//             where: { name: user_name }
+//         });
+        
+//         return res.json({
+//             code: 200,
+//             payload: JSON.stringify(user),
+//         });
+  
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({
+//             code: 500,
+//             message: '서버 에러',
+//         });
+//     }
+// });
+
 //신규 유저 등록하기 (관리자)
 router.post('/register/user-login', async (req, res) => {
     const { user_email, user_pw } = req.body;
