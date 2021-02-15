@@ -22,5 +22,4 @@ module.exports = {
     "host": "admin-yonal.ci04dcmjvtyq.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
-}
 };
