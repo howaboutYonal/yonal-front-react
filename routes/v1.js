@@ -84,29 +84,6 @@ router.post('/get/project-result', async (req, res) =>{
 });
 
 
-// //링크 타고온 new user 저장
-// router.post('/link/nickname', async (req, res) => {
-//     const { projectId, user_nickname } = req.body;
-//     try {
-        
-//         //같은 프로젝트에 닉네임 중복체크
-//         let user = await ProjectUser.findOne({
-//             where: { name: user_name }
-//         });
-        
-//         return res.json({
-//             code: 200,
-//             payload: JSON.stringify(user),
-//         });
-  
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({
-//             code: 500,
-//             message: '서버 에러',
-//         });
-//     }
-// });
 
 //신규 유저 등록하기 (관리자)
 router.post('/register/user-login', async (req, res) => {
@@ -145,5 +122,58 @@ router.post('/register/user-login', async (req, res) => {
         });
     }
 });
+
+// *****만드는 중*****
+
+// // 유저의 투표를 업로드, project-user와 voteData에 업로드해야함
+// //router.post('/save/project-userId-date'), async(req,res) =>{
+// //    const {projectId, userId, date} = req.body;
+// router.get('/get/:project/:userId/:date', async (req, res) =>{    
+//     const projectId = req.params.project;
+//     const userId = req.params.userId;
+//     const date = req.params.date;// date array형식
+//     console.log(projectId, userId,date);
+//     const projectuser_data = await ProjectUser.findOne({
+//         attributes: ['id','userId'],
+//         where: {projectId: projectId, userId:userId, isManager:0}
+//     });
+//     console.log(projectuser_data);
+//     id_for_creat_votedata = 0;
+//     if(projectuser_data){// 이하 코드는 실제 데이터가 삭제되기때문에 개발단계 주석처리
+//         // user가 앞서서 투표한 내용이 있으면 votedata 삭제해줘야함
+//         //VoteData.destroy({where:{id:projectuser_data.dataValues.id}});
+//         id_for_creat_votedata = projectuser_data.dataValues.id;
+//     }else{
+//         created_Date = await ProjectUser.create({
+//             projectId:projectId, userId:userId, isManager:0
+//         }).then(result => console.log(result));
+//     }
+// });
+
+
+
+// //링크 타고온 new user 저장
+// router.post('/link/nickname', async (req, res) => {
+//     const { projectId, user_nickname } = req.body;
+//     try {
+        
+//         //같은 프로젝트에 닉네임 중복체크
+//         let user = await ProjectUser.findOne({
+//             where: { name: user_name }
+//         });
+        
+//         return res.json({
+//             code: 200,
+//             payload: JSON.stringify(user),
+//         });
+  
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({
+//             code: 500,
+//             message: '서버 에러',
+//         });
+//     }
+// });
 
 module.exports = router
