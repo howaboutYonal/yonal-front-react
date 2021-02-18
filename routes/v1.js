@@ -152,28 +152,56 @@ router.post('/register/user-login', async (req, res) => {
 
 
 
-// //링크 타고온 new user 저장
-// router.post('/link/nickname', async (req, res) => {
-//     const { projectId, user_nickname } = req.body;
-//     try {
+//링크 타고온 new user 저장
+router.post('/link/nickname', async (req, res) => {
+    const { project_id, user_nickname } = req.body;
+    try {
         
-//         //같은 프로젝트에 닉네임 중복체크
-//         let user = await ProjectUser.findOne({
-//             where: { name: user_name }
-//         });
+        //같은 프로젝트에 닉네임 중복체크
+        let user = await ProjectUser.findOne({
+            where: { name: user_name }
+        });
         
-//         return res.json({
-//             code: 200,
-//             payload: JSON.stringify(user),
-//         });
-  
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({
-//             code: 500,
-//             message: '서버 에러',
-//         });
-//     }
-// });
+        const same_nickname = await Promise.all(projectuser_id_userid.map(async function(x) {
+            return await User.findOne({attributes:['name'], where:{project_id: x.dataValues.projectId}})
+        })); //맞는건가
+
+        if(same_nickname){
+            return res.json({
+                code: 202,
+                message:'같은 닉네임이 있습니다.',
+                
+            });
+        }
+
+        const new_user = await User.create({ //TODO autoincrement
+            id: LAST_INSERT_ID(),
+            name: user_nickname
+        });
+
+        console.log(`insert into user values ${new_user}`);
+
+        const new_project_user = await ProjectUser.create({
+            id: LAST_INSERT_ID(),
+            projectId: project_id,
+            userId:User.LAST_INSERT_ID(),
+            isManager: false
+        });
+
+        return res.json({
+            code: 200,
+            payload: JSON.stringify(new_project_user),
+        });
+
+
+        
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
 
 module.exports = router
