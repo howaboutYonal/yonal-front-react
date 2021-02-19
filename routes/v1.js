@@ -47,6 +47,45 @@ router.use('/check',(req,res)=>{
     }
 });
 
+// invitedLink -> 프로젝트 정보(프로젝트 이름, 참여자 수, 일정)
+router.post('/get/link-data', async(req,res) =>{
+    const inviteLink = req.body;
+    try {
+
+        const selectedProject = await Project.findOne({
+            attributes:['projectId', 'name', 'startDate','endDate'],
+            where:{inviteLink:inviteLink}
+        });
+
+        if(!selectedProject){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 프로젝트입니다.'
+            })
+        }
+
+        const projectuser_userID_count = await ProjectUser.count({
+            attributes:['userID'],
+            where:{projectId:selectedProject.dataValues.projectId, isManager:0}
+        });
+
+        return res.json({
+            code: 200,
+            projectName: selectedProject.dataValues.name,
+            number: projectuser_userID_count,
+            startDate:selectedProject.dataValues.startDate,
+            endDate:selectedProject.dataValues.endDate
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
+
 // 프로젝트 생성 api -> project, projectuser테이블 업데이트
 router.post('/create/project', async(req, res) =>{
    const {name, userId, startDate, endDate, invitedLink} = req.body;
