@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+import axios from 'axios';
 
 /*  참여한 모든 유저의 date데이터를 api로 불러온다.
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
@@ -25,6 +26,14 @@ const Result = () => {
         const body = await response.json();
         return body;
     };
+    // req sample, param1이름은 데이터베이스 col(?)이거 이름과 같아야함
+    // const sample = async() =>{
+    //     const res = await axios('http://localhost:5000/v1/sample',{
+    //         param1:sampleparam1,
+    //         param2:sampleparam2
+    //     });
+    //     setTest({customers:res.data});
+    // };
 
     function tileClassName(params){
         if(params.view === 'month' && !(test.customers.length ===0))
