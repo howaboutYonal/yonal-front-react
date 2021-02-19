@@ -125,30 +125,42 @@ router.post('/register/user-login', async (req, res) => {
 
 // *****만드는 중*****
 
-// // 유저의 투표를 업로드, project-user와 voteData에 업로드해야함
-// //router.post('/save/project-userId-date'), async(req,res) =>{
-// //    const {projectId, userId, date} = req.body;
-// router.get('/get/:project/:userId/:date', async (req, res) =>{    
-//     const projectId = req.params.project;
-//     const userId = req.params.userId;
-//     const date = req.params.date;// date array형식
-//     console.log(projectId, userId,date);
-//     const projectuser_data = await ProjectUser.findOne({
-//         attributes: ['id','userId'],
-//         where: {projectId: projectId, userId:userId, isManager:0}
-//     });
-//     console.log(projectuser_data);
-//     id_for_creat_votedata = 0;
-//     if(projectuser_data){// 이하 코드는 실제 데이터가 삭제되기때문에 개발단계 주석처리
-//         // user가 앞서서 투표한 내용이 있으면 votedata 삭제해줘야함
-//         //VoteData.destroy({where:{id:projectuser_data.dataValues.id}});
-//         id_for_creat_votedata = projectuser_data.dataValues.id;
-//     }else{
-//         created_Date = await ProjectUser.create({
-//             projectId:projectId, userId:userId, isManager:0
-//         }).then(result => console.log(result));
-//     }
-// });
+// 유저의 투표를 업로드, project-user와 voteData에 업로드해야함
+router.post('/save/project-userId-date', async(req,res) =>{
+   const {projectId, userId, date} = req.body;// date 는 Date array형식
+    try {
+        
+        const projectuser_data = await ProjectUser.findOne({
+            attributes: ['id','userId'],
+            where: {projectId: projectId, userId:userId, isManager:0}
+        });
+    
+        if(!projectuser_data){
+            return res.json({
+                code: 202,
+                message:'해당 유저가 존재하지 않습니다.',
+            });
+        }
+        if(!date){
+            return res.json({
+                code: 202,
+                message:'선택한 날짜가 존재하지 않습니다.',
+            });
+        }
+    
+        // user가 앞서서 투표한 내용이 있으면 votedata 삭제해줘야함
+        VoteData.destroy({where:{id:projectuser_data.dataValues.id}});
+        await Promise.all(date.map(async (x) =>{
+            return await VoteData.create({id:projectuser_data.dataValues.id, date:x});
+        }));
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
 
 
 
