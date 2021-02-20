@@ -3,10 +3,14 @@ import {Link} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './calendar.css';
+import axios from 'axios';
 
 /*  사용자가 참여 가능한 날짜를 선택할 수 있는 달력 컴포넌트
     사용자가 날짜를 선택하면 해당 날짜가 days에 date형식으로 저장된다.
     이어서 버튼을 누르면, days에 저장된 데이터가 db로 업로드된다. */
+
+// nickname은 props를 통해 전달되어야 한다.
+// projectId는 링크를 통해 유추한다.
 
 const CalendarComponent = () => {
     const [days, setDays] = useState([]);
@@ -30,14 +34,14 @@ const CalendarComponent = () => {
             setDays(tmp);
         }
     }
+    
     const fetchApi = async() =>{
-        //        const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
-        //            projectId : 0,// for test
-        //            userId :2,// for test
-        //            date:[new Date()]// for test
-        //        });
-        //        console.log(res);
-            }
+               const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
+                   projectId : 0,// for test
+                   userId :2,// for test
+                   date:days
+               });
+    }
 
     function tileClassName(params){
         if(params.view === 'month' && !(days.length ===0))
@@ -55,7 +59,6 @@ const CalendarComponent = () => {
                 minDate={value}
                 tileClassName={tileClassName}
             />
-            <p>{days.map(x=> x.valueOf())}</p>
             <Link to='/totalcal'>
             <button className = 'btn' onClick={fetchApi}>YONAL</button>
             </Link>
