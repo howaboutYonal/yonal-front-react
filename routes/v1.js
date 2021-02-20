@@ -1,4 +1,5 @@
 const express = require('express');
+const { json } = require('sequelize');
 // const { combineTableNames } = require('sequelize/types/lib/utils');
 const router = express.Router();
 const { User, Project, ProjectUser,VoteData } = require('../models');
@@ -8,26 +9,6 @@ url 예시
 localhost:5000/v1/user
 */
 
-//TEST: user length
-router.post('/user', async (req, res)=>{
-    try {
-        const users = await User.findAll();
-
-        console.log(users.length);
-
-        return res.json({
-            code: 200,
-            payload: JSON.stringify(users),
-        });
-  
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            code: 500,
-            message: '서버 에러',
-        });
-    }
-});
 
 // save/sharedLink
 router.post('/save/shareLink', async(req, res) =>{
@@ -264,7 +245,7 @@ router.post('/register/user-login', async (req, res) => {
 });
 
 // 유저의 투표를 업로드, voteData에 업로드해야함
-router.post('/save/project-userId-date', async(req,res) =>{
+router.post('/save/project-userId-date', async(req,res) => {
    const {projectId, userId, date} = req.body;// date 는 Date array형식
     try {
 
@@ -309,56 +290,87 @@ router.post('/save/project-userId-date', async(req,res) =>{
 
 //링크 타고온 new user 저장
 router.post('/link/nickname', async (req, res) => {
-    const { project_id, user_nickname } = req.body;
+    const project_id = 2;
+    const user_nickname = "zito";
+    //1. 링크타고 들어와서 닉네임 입력하면, 디폴트로 이름 입력칸에 "익명 `명수 + 1`" 보여줌 - 이건 이전화면에서 props 로
+    //2. 이름이 프로젝트에 현재 존재하는 이름일때 202 " 이미 존재합니다."
+    //3. 아니면 db에 저장
+    //
+
     try {
-        let projectuser_id_userid = await ProjectUser.findAll({
-            where:{projectId: project_id}
+
+        //2.
+        const projectuser = await ProjectUser.findAll({
+            attributes:['id','projectId','userId'],
+            where:{projectId: project_id},
+            include:{
+                attributes:['name'],
+                model: User,
+                where:{name:user_nickname}
+            },
+            raw:true
         });
 
-        if (!projectuser_id_userid){
+        console.log(projectuser);
+        console.log(projectuser.length)
+
+
+        if(projectuser.length != 0){
             return res.status(202).json({
                 code: 202,
-                message: '존재하지 않는 캘린더입니다.'
-            })
-        }else{
-            console.log(projectuser_id_userid.length);
-            return res.status(202).json({
-                code: 200,
-                message: '존재하지 않는 캘린더입니다.'
+                message: '이미 존재하는 닉네임입니다.'
             })
         }
-        
-        const same_nickname = await Promise.all(projectuser_id_userid.map(async function(x) {
-            return await User.findOne({attributes:['name'], where:{projectId: x.dataValues.projectId}})
-        })); //맞는건가
 
-        if(same_nickname){
-            return res.json({
-                code: 202,
-                message:'같은 닉네임이 있습니다.',
-                
-            });
-        }
+        //create new user\
+        // const new_user = await User.create({ //TODO autoincrement
+        //     name: user_nickname
+        // }).complete(function(err, result) {
+        //     if(err) {
+        //         callback(0);
+        //     } else {
+        //         console.log("result"+ result);
 
-        const new_user = await User.create({ //TODO autoincrement
-            id: LAST_INSERT_ID(),
-            name: user_nickname
-        });
+        //         callback(result.id);
+        //     }
+        // })
 
-        console.log(`insert into user values ${new_user}`);
+        // console.log(result);
 
-        const new_project_user = await ProjectUser.create({
-            id: LAST_INSERT_ID(),
-            projectId: project_id,
-            userId:User.LAST_INSERT_ID(),
-            isManager: false
-        });
+
+
+        // const new_project_user = await ProjectUser.create({
+        //     projectId: project_id,
+            
+        //     isManager: false
+        // });
 
         return res.json({
             code: 200,
-            payload: JSON.stringify(new_project_user),
+            payload: JSON.stringify(projectuser),
         });
 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
+
+//TEST: user length
+router.post('/user', async (req, res)=>{
+    try {
+        const users = await ProjectUser.findAll();
+
+        console.log(users.length);
+
+        return res.json({
+            code: 200,
+            payload: JSON.stringify(users),
+        });
+  
     } catch (error) {
         console.error(error);
         return res.status(500).json({
