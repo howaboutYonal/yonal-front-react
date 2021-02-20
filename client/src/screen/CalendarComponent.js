@@ -30,6 +30,14 @@ const CalendarComponent = () => {
             setDays(tmp);
         }
     }
+    const fetchApi = async() =>{
+        //        const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
+        //            projectId : 0,// for test
+        //            userId :2,// for test
+        //            date:[new Date()]// for test
+        //        });
+        //        console.log(res);
+            }
 
     function tileClassName(params){
         if(params.view === 'month' && !(days.length ===0))
@@ -49,7 +57,7 @@ const CalendarComponent = () => {
             />
             <p>{days.map(x=> x.valueOf())}</p>
             <Link to='/totalcal'>
-                <button className = 'btn'>YONAL</button>
+            <button className = 'btn' onClick={fetchApi}>YONAL</button>
             </Link>
         </div>
     );

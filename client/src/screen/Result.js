@@ -26,14 +26,6 @@ const Result = () => {
         const body = await response.json();
         return body;
     };
-    // req sample, param1이름은 데이터베이스 col(?)이거 이름과 같아야함
-    // const sample = async() =>{
-    //     const res = await axios('http://localhost:5000/v1/sample',{
-    //         param1:sampleparam1,
-    //         param2:sampleparam2
-    //     });
-    //     setTest({customers:res.data});
-    // };
 
     function tileClassName(params){
         if(params.view === 'month' && !(test.customers.length ===0))
