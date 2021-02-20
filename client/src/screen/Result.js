@@ -7,24 +7,43 @@ import axios from 'axios';
 /*  참여한 모든 유저의 date데이터를 api로 불러온다.
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
 
+// projectId는 링크를 통해 유추한다.
+
 const Result = () => {
     const [value, ] = useState(new Date());
     const [test, setTest] = useState([
+        // {
+        //     customers:""
+        // }
+    ]);
+    const [users, setUsers] = useState([
         {
-            customers:""
+            users:""
+        }
+    ]);
+    const [voteData, setVoteData] = useState([
+        {
+            votedata:""
         }
     ]);
 
     useEffect(() =>{
-        callApi()
-            .then(res => setTest({customers: res}))
-            .catch(err => console.log(err));
+        // callApi()
+        //     .then(res => setTest({customers: res}))
+        //     .catch(err => console.log(err));
+        fetchApi().then(console.log(test));
     },[]);
 
     async function callApi(){
         const response = await fetch('/api/user');
         const body = await response.json();
         return body;
+    };
+
+    const fetchApi = async() =>{
+        const res = await axios.post('http://localhost:5000/v1/get/project-result',{
+            projectId: 0
+        }).then(result => console.log(result.data.user_name,result.data.votedata));
     };
 
     function tileClassName(params){

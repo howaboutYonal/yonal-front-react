@@ -177,7 +177,7 @@ router.post('/get/project-result', async (req, res) =>{
         }
     
         const votedata = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
-            return await VoteData.findOne({ where:{id:x.dataValues.id}});
+            return await VoteData.findOne({attributes:['date'], where:{id:x.dataValues.id}});
         }));
     
         const user_name = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
