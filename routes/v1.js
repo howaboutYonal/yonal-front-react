@@ -206,43 +206,6 @@ router.post('/get/project-result', async (req, res) =>{
     }
 });
 
-//신규 유저 등록하기 (관리자)
-router.post('/register/user-login', async (req, res) => {
-    const { user_email, user_pw } = req.body;
-    try {
-        
-        let user = await User.findOne({
-            where: { email: user_email }
-        });
-
-        if(user){
-            return res.status(202).json({
-            code: 202,
-            message: '등록된 유저 입니다.',
-            });
-        }
-
-        const hash = await bcrypt.hash(user_pw, SALT_ROUND); 
-        user = await User.create({
-            email: user_email,
-            pw: hash
-        });
-        
-        console.log(`insert into users values ${user}`);
-        
-        return res.json({
-            code: 200,
-            payload: JSON.stringify(user),
-        });
-  
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            code: 500,
-            message: '서버 에러',
-        });
-    }
-});
 
 // 유저의 투표를 업로드, voteData에 업로드해야함
 router.post('/save/project-userId-date', async(req,res) => {
@@ -286,16 +249,50 @@ router.post('/save/project-userId-date', async(req,res) => {
     }
 });
 
+//신규 유저 등록하기 (관리자) - TODO 구글 로그인 확정되면 좀 손봐야함
+router.post('/register/google-login', async (req, res) => {
+    const {user_name, user_email ,user_profile} = req.body;
+    try {
+        
+        let user = await User.findOne({
+            where: { email: user_email }
+        });
 
+        if(user){
+            return res.status(202).json({
+            code: 202,
+            message: '등록된 유저 입니다.',
+            payload: JSON.stringify(user)
+            });
+        }
+
+        const new_user = await User.create({ //TODO autoincrement
+            name: user_name,
+            email: user_email,
+        })
+
+        return res.json({
+            code: 200,
+            payload: JSON.stringify(new_user),
+        });
+  
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
 
 //링크 타고온 new user 저장
-router.post('/link/nickname', async (req, res) => {
+router.post('/link/new-user', async (req, res) => {
     const project_id = 2;
-    const user_nickname = "zito";
+    const user_nickname = "jojo2";
     //1. 링크타고 들어와서 닉네임 입력하면, 디폴트로 이름 입력칸에 "익명 `명수 + 1`" 보여줌 - 이건 이전화면에서 props 로
     //2. 이름이 프로젝트에 현재 존재하는 이름일때 202 " 이미 존재합니다."
-    //3. 아니면 db에 저장
-    //
+    //3. 아니면 user에 추가하고, projectUser 에 추가
+
 
     try {
 
@@ -322,28 +319,18 @@ router.post('/link/nickname', async (req, res) => {
             })
         }
 
-        //create new user\
-        // const new_user = await User.create({ //TODO autoincrement
-        //     name: user_nickname
-        // }).complete(function(err, result) {
-        //     if(err) {
-        //         callback(0);
-        //     } else {
-        //         console.log("result"+ result);
+        //create new user
+        const new_user = await User.create({ //TODO autoincrement
+            name: user_nickname
+        })
 
-        //         callback(result.id);
-        //     }
-        // })
+        console.log("RESULT:\n",new_user);
 
-        // console.log(result);
-
-
-
-        // const new_project_user = await ProjectUser.create({
-        //     projectId: project_id,
-            
-        //     isManager: false
-        // });
+        const new_project_user = await ProjectUser.create({
+            projectId: project_id,
+            userId:new_user.dataValues.userId,
+            isManager: 0
+        });
 
         return res.json({
             code: 200,

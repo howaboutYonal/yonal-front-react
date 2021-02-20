@@ -13,6 +13,9 @@ module.exports = class ProjectUser extends Sequelize.Model{
             projectId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                include:{
+                    
+                }
             },
             userId:{
                 type: Sequelize.INTEGER,
