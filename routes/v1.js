@@ -29,15 +29,48 @@ router.post('/user', async (req, res)=>{
     }
 });
 
-//정상작동하는지 check
-router.use('/check',(req,res)=>{
+// sharedLink로 프로젝트 매칭 결과 호출
+router.post('/get/project-result-from-link', async(req, res) =>{
+    const shareLink = req.body;
     try {
-        console.log('hi');
-        
-        return res.json({
-            code: 200
+
+        const project_projectId = await Project.findOne({
+            attributes:['projectId'],
+            where :{shareLink:shareLink}
         });
-  
+
+        const projectuser_data = await ProjectUser.findAndCountAll({
+            attributes:['id', 'userId'],
+            where:{projectId:project_projectId.dataValues.projectId, isManager:0}
+        });
+        if (!project_projectId||!projectuser_data){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 캘린더입니다.'
+            });
+        }
+    
+        const votedata = await Promise.all(projectuser_data.rows.map(async function(x) {
+            return await VoteData.findOne({ where:{id:x.dataValues.id}});
+        }));
+    
+        const user_name = await Promise.all(projectuser_data.rows.map(async function(x) {
+            return await User.findOne({attributes:['name'], where:{userId: x.dataValues.userId}})
+        }));
+    
+        if (!votedata || !user_name){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 유저입니다.',
+                }); 
+        }
+        return res.json({
+            code: 200,
+            count:projectuser_data.count,
+            votedata: JSON.stringify(votedata),
+            user_name: JSON.stringify(user_name)
+        });
+        
     } catch (error) {
         console.error(error);
         return res.status(500).json({
@@ -122,7 +155,7 @@ router.post('/create/project', async(req, res) =>{
 router.post('/get/project-result', async (req, res) =>{
     const project_id = req.body;
     try {
-        const projectuser_id_userid = await ProjectUser.findAll({
+        const projectuser_id_userid = await ProjectUser.findAndCountAll({
             attributes:['id', 'userId'],
             where:{projectId: project_id}
         });
@@ -133,11 +166,11 @@ router.post('/get/project-result', async (req, res) =>{
             })
         }
     
-        const votedata = await Promise.all(projectuser_id_userid.map(async function(x) {
+        const votedata = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
             return await VoteData.findOne({ where:{id:x.dataValues.id}});
         }));
     
-        const user_name = await Promise.all(projectuser_id_userid.map(async function(x) {
+        const user_name = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
             return await User.findOne({attributes:['name'], where:{userId: x.dataValues.userId}})
         }));
     
@@ -150,6 +183,7 @@ router.post('/get/project-result', async (req, res) =>{
     
         return res.json({
             code: 200,
+            count: projectuser_id_userid.count,
             votedata: JSON.stringify(votedata),
             user_name: JSON.stringify(user_name)
         });
