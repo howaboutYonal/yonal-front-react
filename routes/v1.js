@@ -131,14 +131,14 @@ router.post('/get/link-data', async(req,res) =>{
 
 // 프로젝트 생성 api -> project, projectuser테이블 업데이트
 router.post('/create/project', async(req, res) =>{
-   const {name, userId, startDate, endDate, invitedLink} = req.body;
+   const {name, userId, startDate, endDate, inviteLink} = req.body;
     try {
         // project생성
         const project_Data = await Project.create({
             name:name,
             startDate:startDate,
             endDate:endDate,
-            invitedLink:invitedLink
+            inviteLink:inviteLink
         });
         // projectuser 생성
         const projectuser_Date = await ProjectUser.create({
