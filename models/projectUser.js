@@ -27,7 +27,7 @@ module.exports = class ProjectUser extends Sequelize.Model{
                 timestamps: false,
                 underscored: false,
                 modelName: 'ProjectUser',
-                tableName: 'project-user',
+                tableName: 'projectUser',
                 paranoid: true,
                 charset: 'utf8',
                 collate: 'utf8_general_ci',

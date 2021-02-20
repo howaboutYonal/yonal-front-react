@@ -248,14 +248,25 @@ router.post('/save/project-userId-date', async(req,res) =>{
 router.post('/link/nickname', async (req, res) => {
     const { project_id, user_nickname } = req.body;
     try {
-        
-        //같은 프로젝트에 닉네임 중복체크
-        let user = await ProjectUser.findOne({
-            where: { name: user_name }
+        let projectuser_id_userid = await ProjectUser.findAll({
+            where:{projectId: project_id}
         });
+
+        if (!projectuser_id_userid){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 캘린더입니다.'
+            })
+        }else{
+            console.log(projectuser_id_userid.length);
+            return res.status(202).json({
+                code: 200,
+                message: '존재하지 않는 캘린더입니다.'
+            })
+        }
         
         const same_nickname = await Promise.all(projectuser_id_userid.map(async function(x) {
-            return await User.findOne({attributes:['name'], where:{project_id: x.dataValues.projectId}})
+            return await User.findOne({attributes:['name'], where:{projectId: x.dataValues.projectId}})
         })); //맞는건가
 
         if(same_nickname){
