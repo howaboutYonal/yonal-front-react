@@ -29,6 +29,35 @@ router.post('/user', async (req, res)=>{
     }
 });
 
+// save/sharedLink
+router.post('/save/shareLink', async(req, res) =>{
+    const {shareLink, projectId} = req.body;
+    try {
+        const project = await Project.update(
+            {shareLink:shareLink},
+            {where:{projectId:projectId}},
+
+        );
+        if (!project){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 캘린더입니다.'
+            });
+        }
+        return res.json({
+            code: 200,
+            payload: JSON.stringify(project)
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
+
 // sharedLink로 프로젝트 매칭 결과 호출
 router.post('/get/project-result-from-link', async(req, res) =>{
     const shareLink = req.body;
