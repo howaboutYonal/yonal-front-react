@@ -2,11 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 const HomePage = ({location}) => {
-    const profileImg = location.image;
+    const myName = location.name;
+    const myImg = location.image;
     return (
         <div>
             <div>
-                <img className='profile' src={profileImg}/>
+                {myName}
+                <br></br>
+                <img className='profile' src={myImg}/>
             </div>
             <div className='logoText'>내 프로젝트</div>
             {/* DB에서 받아온 프로젝트 정보 표시 */}
