@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import {withRouter} from 'react-router-dom'
 import BoxDescription from '../component/BoxDescription'
 import icon_plan from '../image/yonal_icon_plan.png'
+import axios from 'axios';
 
+function saveData(projectId, nickname) {
+    axios.post('http://localhost:5000/v1/get/link-data', {
+        project_id:projectId,
+        user_nickname:nickname
+    });
+
+}
 
 const Guest = ({location, history}) => {
     const [nickname, setNickname] = useState('');
@@ -10,15 +18,11 @@ const Guest = ({location, history}) => {
         if(nickname == ''){
             alert("닉네임을 입력해주세요.");
         }else{
-            console.log("넘어간다~~~~~~~")
-            history.push({pathname: "/calendar", nickname:nickname});
+            saveData(location.projectId, nickname);
+            history.push({pathname: "/calendar", nickname:nickname, projectId: location.projectId});
         }
     }
-    const checkForm = () => {
-        console.log("CHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECK")
 
-        alert({nickname});
-    }
     const getObject = () => {
         return `{{pathname: '/vote', nickname: ${nickname}}}`;
     } 

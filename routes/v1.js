@@ -115,6 +115,7 @@ router.post('/get/link-data', async(req,res) =>{
 
         return res.json({
             code: 200,
+            projectId: selectedProject.dataValues.projectId,
             projectName: selectedProject.dataValues.name,
             number: memberCount,
             startDate:selectedProject.dataValues.startDate,
@@ -289,12 +290,10 @@ router.post('/register/google-login', async (req, res) => {
 
 //링크 타고온 new user 저장
 router.post('/link/new-user', async (req, res) => {
-    const project_id = 2;
-    const user_nickname = "jojo2";
     //1. 링크타고 들어와서 닉네임 입력하면, 디폴트로 이름 입력칸에 "익명 `명수 + 1`" 보여줌 - 이건 이전화면에서 props 로
     //2. 이름이 프로젝트에 현재 존재하는 이름일때 202 " 이미 존재합니다."
     //3. 아니면 user에 추가하고, projectUser 에 추가
-
+    const {project_id, user_nickname} = req.body;
 
     try {
 

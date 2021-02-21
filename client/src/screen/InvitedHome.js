@@ -11,6 +11,7 @@ const InvitedHome = ({location}) => {
     // const inviteLink = location.inviteLink;
     // console.log("링크:", location.inviteLink);
 
+    const [projectId, setProjectId] = useState('');
     const [projectTitle, setProjectTitle] = useState('');
     const [memberNum, setMemberNum] = useState('');
     const [projectDate, setProjectDate] = useState('');
@@ -19,6 +20,7 @@ const InvitedHome = ({location}) => {
     axios.post('http://localhost:5000/v1/get/link-data', {
         inviteLink:"http://localhost:3000/invited"
     }).then(function(res){
+        setProjectId(res.data.projectId);
         setProjectTitle(res.data.projectName);
         setMemberNum(res.data.number);
         setProjectDate(res.data.startDate+' - '+res.data.endDate);
@@ -33,7 +35,7 @@ const InvitedHome = ({location}) => {
                 <BoxDescription icon={icon_calendar} title="매칭 일정" content={projectDate}/>
             </div>
 
-            <Link to={{pathname: '/guest', projectTitle: projectTitle}}>
+            <Link to={{pathname: '/guest', projectId: projectId, projectTitle: projectTitle}}>
                 <button className = 'btn'>입장하기</button>
             </Link>
         </div>

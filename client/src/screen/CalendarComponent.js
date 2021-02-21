@@ -13,8 +13,9 @@ import axios from 'axios';
 // projectId는 링크를 통해 유추한다.
 
 const CalendarComponent = ({location, history}) => {
-    console.log(history)
-    console.log(location.nickname)
+    const projectId = location.projectId;
+    const nickname = location.nickname;
+
     const [days, setDays] = useState([]);
     const [value, ] = useState(new Date());
 
@@ -39,7 +40,7 @@ const CalendarComponent = ({location, history}) => {
     
     const fetchApi = async() =>{
                const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
-                   projectId : 0,// for test
+                   projectId : projectId,// for test
                    userId :2,// for test
                    date:days
                });
