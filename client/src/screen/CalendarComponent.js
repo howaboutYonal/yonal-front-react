@@ -12,7 +12,9 @@ import axios from 'axios';
 // nickname은 props를 통해 전달되어야 한다.
 // projectId는 링크를 통해 유추한다.
 
-const CalendarComponent = () => {
+const CalendarComponent = ({location, history}) => {
+    console.log(history)
+    console.log(location.nickname)
     const [days, setDays] = useState([]);
     const [value, ] = useState(new Date());
 

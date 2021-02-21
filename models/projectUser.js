@@ -39,5 +39,6 @@ module.exports = class ProjectUser extends Sequelize.Model{
 
     static associate(db){
         db.ProjectUser.hasMany(db.User, {foreignKey:'userId', sourceKey:'userId'})
+        db.ProjectUser.hasMany(db.Project, {foreignKey:'projectId', sourceKey:'projectId'})
     }
 };

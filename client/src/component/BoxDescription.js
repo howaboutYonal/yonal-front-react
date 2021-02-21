@@ -1,7 +1,6 @@
 import React, {} from 'react';
 
 const BoxDescription = (props) => {
-    console.log(props);
     return(
         <div className='descriptionLine'>
             <img className='descriptionIcon' src={props.icon}/>

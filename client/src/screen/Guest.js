@@ -1,27 +1,41 @@
-import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import {withRouter} from 'react-router-dom'
+import BoxDescription from '../component/BoxDescription'
+import icon_plan from '../image/yonal_icon_plan.png'
 
-const Guest = () => {
+
+const Guest = ({location, history}) => {
     const [nickname, setNickname] = useState('');
-    const onSubmit = () => {
+    const onClick = () => {
+        if(nickname == ''){
+            alert("닉네임을 입력해주세요.");
+        }else{
+            console.log("넘어간다~~~~~~~")
+            history.push({pathname: "/calendar", nickname:nickname});
+        }
+    }
+    const checkForm = () => {
+        console.log("CHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECKCHECK")
+
         alert({nickname});
     }
     const getObject = () => {
         return `{{pathname: '/vote', nickname: ${nickname}}}`;
     } 
-    console.log(nickname);
 
     return (
         <div>
+            <BoxDescription icon={icon_plan} title={location.projectTitle}/>
+
             <h3 className='nicknameGuide'>별명을 입력해주세요.</h3>
-                <label>
-                    <input className= "inputField" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder = "별명" />
-                </label>
-                <Link to={{pathname: '/vote', nickname: nickname}}>
-                    <input type="submit" value="확인" className="btn" onSubmit={onSubmit}/>
-                </Link>
+            <form>
+            <label>
+                <input className= "inputField" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder = "별명" />
+            </label>
+            <input type="button" value="투표하러 가기" className="btn" onClick={onClick}/>
+            </form>
         </div>
     );
 }
 
-export default Guest;
+export default withRouter(Guest);

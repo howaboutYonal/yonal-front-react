@@ -4,25 +4,36 @@ import BoxDescription from '../component/BoxDescription'
 import icon_plan from '../image/yonal_icon_plan.png'
 import icon_people from '../image/yonal_icon_people.png'
 import icon_calendar from '../image/yonal_icon_calendar.png'
+import axios from 'axios';
 
 
 const InvitedHome = ({location}) => {
-    const [projectTitle, setProjectTitle] = useState('덕수빈지효');
-    const [memberNum, setMemberNum] = useState('3');
-    const [projectDate, setProjectDate] = useState('2021.01.02 - 2021.02.28');
-    //TODO - get data from server
+    // const inviteLink = location.inviteLink;
+    // console.log("링크:", location.inviteLink);
 
+    const [projectTitle, setProjectTitle] = useState('');
+    const [memberNum, setMemberNum] = useState('');
+    const [projectDate, setProjectDate] = useState('');
+
+
+    axios.post('http://localhost:5000/v1/get/link-data', {
+        inviteLink:"http://localhost:3000/invited"
+    }).then(function(res){
+        setProjectTitle(res.data.projectName);
+        setMemberNum(res.data.number);
+        setProjectDate(res.data.startDate+' - '+res.data.endDate);
+    });
+
+    
     return (
         <div>
             <div className='gray-background'>
- 
                 <BoxDescription icon={icon_plan} title="프로젝트 이름" content={projectTitle}/>
                 <BoxDescription icon={icon_people} title="현재 참여 인원" content={`${memberNum} 명`}/>
                 <BoxDescription icon={icon_calendar} title="매칭 일정" content={projectDate}/>
-                
             </div>
 
-            <Link to='./guest'>
+            <Link to={{pathname: '/guest', projectTitle: projectTitle}}>
                 <button className = 'btn'>입장하기</button>
             </Link>
         </div>

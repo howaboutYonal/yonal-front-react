@@ -58,7 +58,7 @@ function App() {
         <Route path="/home" component={HomePage}/>
         <Route path="/create" component={CreateProject}/>
         <Route path="/copylink" component={CopyLink}/>
-        <Route path="/guest" component={Guest}/>
+        <Route path="/guest/" component={Guest}/>
         <Route path="/vote" component={Vote}/>
         <Route path='/calendar' component={CalendarComponent}/>
       </BrowserRouter>

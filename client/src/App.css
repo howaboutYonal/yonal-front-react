@@ -124,9 +124,8 @@
 	background-color:#ff4d35;
 }
 .btn:active {
-  border: 0;
-  position:fixed;
-	top:0.5px;
+	background-color:#ff4d35;
+
 }
 .btn:focus {
   border: none;

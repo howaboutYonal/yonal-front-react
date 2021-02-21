@@ -51,7 +51,7 @@ const CreateProject = () => {
             endDate:endDate,
             inviteLink:inviteLink
         });
-        console.log(res);
+        console.log(res.data);
     };
     
     return (

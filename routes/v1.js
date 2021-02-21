@@ -92,12 +92,12 @@ router.post('/get/project-result-from-link', async(req, res) =>{
 
 // invitedLink -> 프로젝트 정보(프로젝트 이름, 참여자 수, 일정)
 router.post('/get/link-data', async(req,res) =>{
-    const inviteLink = req.body;
-    try {
+    const {inviteLink} = req.body;
 
+    try {
         const selectedProject = await Project.findOne({
             attributes:['projectId', 'name', 'startDate','endDate'],
-            where:{inviteLink:inviteLink}
+            where:{inviteLink: inviteLink}
         });
 
         if(!selectedProject){
@@ -107,15 +107,16 @@ router.post('/get/link-data', async(req,res) =>{
             })
         }
 
-        const projectuser_userID_count = await ProjectUser.count({
+
+        const memberCount = await ProjectUser.count({
             attributes:['userID'],
-            where:{projectId:selectedProject.dataValues.projectId, isManager:0}
+            where:{projectId:selectedProject.dataValues.projectId}
         });
 
         return res.json({
             code: 200,
             projectName: selectedProject.dataValues.name,
-            number: projectuser_userID_count,
+            number: memberCount,
             startDate:selectedProject.dataValues.startDate,
             endDate:selectedProject.dataValues.endDate
         });
