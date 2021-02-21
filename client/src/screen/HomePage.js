@@ -9,7 +9,7 @@ const HomePage = () => {
             </Link>
             {/* 삭제 예정 */}
             <Link to='./invited'>
-                <button className = 'indexBtn'>프로젝트입장</button>
+                <button className = 'indexBtn'>프로젝트입장(삭제예정)</button>
             </Link>
             <div className='logoText'>내 프로필</div>
             {/* DB에서 받아온 프로필 정보 표시 */}
