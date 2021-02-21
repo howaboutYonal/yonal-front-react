@@ -39,7 +39,7 @@ function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
 const CreateProject = () => {
     
     const classes = useStyles();
-    const [name, setName] = useState('');
+    const [name, setName] = useState(null);
     const [startDate, setStartDate] = useState(getTimeStamp());
     const [endDate, setEndDate] = useState(getTimeStamp());
     const [inviteLink, ] = useState('http://localhost:3000/invite/'+getUUID());
