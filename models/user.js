@@ -18,8 +18,8 @@ module.exports = class User extends Sequelize.Model{
                 type: Sequelize.STRING(50),
                 allowNull: true 
             },
-            pw:{
-                type: Sequelize.STRING(20),
+            image:{
+                type: Sequelize.STRING(50),
                 allowNull: true 
             },
             }, {

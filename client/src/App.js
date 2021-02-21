@@ -12,8 +12,12 @@ import Guest from './screen/Guest'
 import Vote from './screen/Vote'
 import CalendarComponent from './screen/CalendarComponent';
 
-function App() {
+function App({location}) {
   const [isLogin, setIsLogin] = useState(false);
+  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [userImage, setUserImage] = useState('https://placeimg.com/64/64/1');
+
   return (
     isLogin==true?
     <div className="App">
@@ -22,7 +26,7 @@ function App() {
           <button onClick={()=>setIsLogin(false)}>로그아웃</button>
         </Link>
         <div className='logoText'>우리 모두 일정 맞추기</div>
-        <Link to='./home'>
+        <Link to={{pathname: './home', image: userImage}}>
           <img className='Applogo' src={yonal_logo}/>  
         </Link>
         <Route path="/" component={this}/>
@@ -39,7 +43,7 @@ function App() {
     :
     <div className="App">
         <BrowserRouter>
-          <Link to='./home'>
+          <Link to={{pathname: './home', image: userImage}}>
             <button onClick={()=>setIsLogin(true)}>로그인</button>
           </Link>
           <div className='logoText'>우리 모두 일정 맞추기</div>

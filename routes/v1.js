@@ -251,7 +251,7 @@ router.post('/save/project-userId-date', async(req,res) => {
 
 //신규 유저 등록하기 (관리자) - TODO 구글 로그인 확정되면 좀 손봐야함
 router.post('/register/google-login', async (req, res) => {
-    const {user_name, user_email ,user_profile} = req.body;
+    const {user_name, user_email ,user_image} = req.body;
     try {
         
         let user = await User.findOne({
@@ -269,6 +269,7 @@ router.post('/register/google-login', async (req, res) => {
         const new_user = await User.create({ //TODO autoincrement
             name: user_name,
             email: user_email,
+            image: user_image
         })
 
         return res.json({

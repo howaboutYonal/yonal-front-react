@@ -16,7 +16,9 @@
   width: 171px;
 }
 
-
+.profile {
+  border-radius: 40%;
+}
 
 .logoText{
   position: relative;
