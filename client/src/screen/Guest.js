@@ -5,7 +5,7 @@ import icon_plan from '../image/yonal_icon_plan.png'
 import axios from 'axios';
 
 function saveData(projectId, nickname) {
-    axios.post('http://localhost:5000/v1/get/link-data', {
+    axios.post('http://localhost:5000/v1/link/new-user', {
         project_id:projectId,
         user_nickname:nickname
     });

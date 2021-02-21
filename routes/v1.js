@@ -290,14 +290,11 @@ router.post('/register/google-login', async (req, res) => {
 
 //링크 타고온 new user 저장
 router.post('/link/new-user', async (req, res) => {
-    //1. 링크타고 들어와서 닉네임 입력하면, 디폴트로 이름 입력칸에 "익명 `명수 + 1`" 보여줌 - 이건 이전화면에서 props 로
-    //2. 이름이 프로젝트에 현재 존재하는 이름일때 202 " 이미 존재합니다."
-    //3. 아니면 user에 추가하고, projectUser 에 추가
     const {project_id, user_nickname} = req.body;
 
     try {
+        //if already exist
 
-        //2.
         const projectuser = await ProjectUser.findAll({
             attributes:['id','projectId','userId'],
             where:{projectId: project_id},
@@ -320,6 +317,16 @@ router.post('/link/new-user', async (req, res) => {
             })
         }
 
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+
+    try{
+        
         //create new user
         const new_user = await User.create({ //TODO autoincrement
             name: user_nickname
@@ -338,10 +345,10 @@ router.post('/link/new-user', async (req, res) => {
             payload: JSON.stringify(projectuser),
         });
 
-    } catch (error) {
+    }catch (error) {
         console.error(error);
-        return res.status(500).json({
-            code: 500,
+        return res.status(501).json({
+            code: 501,
             message: '서버 에러',
         });
     }
