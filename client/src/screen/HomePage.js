@@ -8,7 +8,7 @@ import CopyLink from '../screen/HomePages/CopyLink'
 import ResultForManager from '../screen/HomePages/ResultForManager'
 import GoogleButton from '../component/GoogleButton'
 
-const HomePage = ({location}) => {
+const HomePage = () => {
   const [isLogin, setIsLogin] = useState(null);
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
