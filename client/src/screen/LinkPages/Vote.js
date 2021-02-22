@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import {BtnCalendar, BtnNoCalendar} from "../component/BtnCalendar";
+import {BtnCalendar, BtnNoCalendar} from "../../component/BtnCalendar";
 
 const Vote = ({location}) => {
     console.log(location.nickname);

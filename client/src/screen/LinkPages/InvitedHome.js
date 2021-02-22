@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
-import BoxDescription from '../component/BoxDescription'
-import icon_plan from '../image/yonal_icon_plan.png'
-import icon_people from '../image/yonal_icon_people.png'
-import icon_calendar from '../image/yonal_icon_calendar.png'
+import BoxDescription from '../../component/BoxDescription'
+import icon_plan from '../../image/yonal_icon_plan.png'
+import icon_people from '../../image/yonal_icon_people.png'
+import icon_calendar from '../../image/yonal_icon_calendar.png'
 import axios from 'axios';
 
 

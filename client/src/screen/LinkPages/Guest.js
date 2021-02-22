@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {withRouter} from 'react-router-dom'
-import BoxDescription from '../component/BoxDescription'
-import icon_plan from '../image/yonal_icon_plan.png'
+import BoxDescription from '../../component/BoxDescription'
+import icon_plan from '../../image/yonal_icon_plan.png'
 import axios from 'axios';
 
 function saveData(projectId, nickname) {

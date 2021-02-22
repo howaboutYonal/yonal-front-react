@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './calendar.css';
+import '../calendar.css';
 import axios from 'axios';
 
 /*  사용자가 참여 가능한 날짜를 선택할 수 있는 달력 컴포넌트

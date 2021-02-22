@@ -3,15 +3,12 @@ import React, {useState} from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import {BrowserRouter, Route, Link} from 'react-router-dom'
-import InvitedHome from './screen/InvitedHome'
+import LinkPage from './screen/LinkPage'
 import Result from './screen/Result'
 import yonal_logo from './image/yonal_logo.png'
 import HomePage from './screen/HomePage'
 import CreateProject from './screen/CreateProject'
 import CopyLink from './screen/CopyLink'
-import Guest from './screen/Guest'
-import Vote from './screen/Vote'
-import CalendarComponent from './screen/CalendarComponent';
 
 const clientId = "88721696570-626294ccdp8h1vthmb7sce60mep2i15q.apps.googleusercontent.com";
 // 클라이언트 보안 비밀번호 Z4L3SvyZM_xL7YyhLN4sufuB
@@ -53,14 +50,10 @@ function App() {
           <img className='Applogo' src={yonal_logo}/>  
         </Link>
         <Route path="/" component={this}/>
-        <Route path="/invited" component={InvitedHome}/>
-        <Route path="/totalcal" component={Result}/>
+        <Route path="/invited" component={LinkPage}/>
         <Route path="/home" component={HomePage}/>
         <Route path="/create" component={CreateProject}/>
         <Route path="/copylink" component={CopyLink}/>
-        <Route path="/guest/" component={Guest}/>
-        <Route path="/vote" component={Vote}/>
-        <Route path='/calendar' component={CalendarComponent}/>
       </BrowserRouter>
     </div>
     :
