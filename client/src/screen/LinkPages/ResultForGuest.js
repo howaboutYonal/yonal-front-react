@@ -14,7 +14,6 @@ const Result = () => {
     const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([
         {
-           user:"",
            votedata:""
         }
     ]);
@@ -29,32 +28,30 @@ const Result = () => {
 
     function jointpars(apiData){
         var voteData = JSON.parse(apiData.votedata);
-        var userName = JSON.parse(apiData.user_name);
-        voteData = voteData.filter(function (element, idx){
+        voteData = voteData[0].filter(function (element){
             if (element) return element.date;
-            else userName.splice(idx,1);
         });
-
         var joint = [];
         for( var i= 0;i<voteData.length;i++){
             joint = [
                 ...joint,
                 {
-                    user:userName[i].name,
                     votedata:voteData[i].date
                 }
             ]
         }
+
         return joint;
     }
     
     useEffect(async () =>{
-        await fetchApi().then(res => jointpars(res)).then(res => setApiData(res));
+        var link = document.location.href;
+        var urlforshareLink = 'http://localhost:5000/v1/get/project-result-from-link';
+        await fetchApi(urlforshareLink,link).then(res => jointpars(res)).then(res => setApiData(res)).then(res=> console.log(apiData));
     },[]);
 
-    function fetchApi(){
-        var url = 'http://localhost:5000/v1/get/project-result';
-        return axios.post(url, {projectId:0}).then(function (res) {
+    function fetchApi(url, param){
+        return axios.post(url, {shareLink:param}).then(function (res) {
             return res.data;
         })
     }

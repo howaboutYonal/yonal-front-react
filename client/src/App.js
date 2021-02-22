@@ -8,6 +8,7 @@ import LinkPage from './screen/LinkPage'
 import HomePage from './screen/HomePage'
 import CreateProject from './screen/CreateProject'
 import CopyLink from './screen/CopyLink'
+import ResultForGuest from './screen/LinkPages/ResultForGuest'
 
 const clientId = "88721696570-626294ccdp8h1vthmb7sce60mep2i15q.apps.googleusercontent.com";
 // 클라이언트 보안 비밀번호 Z4L3SvyZM_xL7YyhLN4sufuB
@@ -52,6 +53,7 @@ function App() {
         <Route path="/home" component={HomePage}/>
         <Route path="/create" component={CreateProject}/>
         <Route path="/copylink" component={CopyLink}/>
+
       </BrowserRouter>
     </div>
     :
@@ -74,6 +76,7 @@ function App() {
                   <button>외부링크</button>
           </Link>
           <Route path="/link" component={LinkPage}/>
+          <Route path="/invite" component={ResultForGuest}/>
         </BrowserRouter>
       </div>
   );
