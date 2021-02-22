@@ -50,7 +50,6 @@ function App() {
           <img className='Applogo' src={yonal_logo}/>  
         </Link>
         <Route path="/" component={this}/>
-        <Route path="/invited" component={LinkPage}/>
         <Route path="/home" component={HomePage}/>
         <Route path="/create" component={CreateProject}/>
         <Route path="/copylink" component={CopyLink}/>
@@ -71,10 +70,11 @@ function App() {
                     onFailure={onFailure}
           />
           </div>
-          <Link to='./totalcal'>
-                <button className = 'indexBtn'>투표결과(삭제예정)</button>
+          
+          <Link to='./link'>
+                  <button>외부링크</button>
           </Link>
-          <Route path="/totalcal" component={Result}/>
+          <Route path="/link" component={LinkPage}/>
         </BrowserRouter>
       </div>
   );

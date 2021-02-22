@@ -4,15 +4,26 @@ import Guest from './LinkPages/Guest'
 import Vote from './LinkPages/Vote'
 import CalendarComponent from './LinkPages/CalendarComponent'
 import InvitedHome from './LinkPages/InvitedHome'
+import Result from './LinkPages/Result'
 
 const LinkPage = () => {
     return (
+        <div>
         <BrowserRouter>
+            <Link to='./invited'>
+                <button>초대링크</button>
+            </Link>
+            <Link to='./totalcal'>
+                <button>결과링크</button>
+            </Link>
+            <Route path="/link" component={this}/>
             <Route path="/invited" component={InvitedHome}/>
             <Route path="/guest/" component={Guest}/>
             <Route path="/vote" component={Vote}/>
             <Route path='/calendar' component={CalendarComponent}/>
+            <Route path="/totalcal" component={Result}/>
         </BrowserRouter>
+        </div>
     );
 }
 
