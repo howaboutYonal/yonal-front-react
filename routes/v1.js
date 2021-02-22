@@ -75,9 +75,8 @@ router.post('/save/shareLink', async(req, res) =>{
 
 // sharedLink로 프로젝트 매칭 결과 호출
 router.post('/get/project-result-from-link', async(req, res) =>{
-    const shareLink = req.body;
+    const {shareLink} = req.body;
     try {
-
         const project_projectId = await Project.findOne({
             attributes:['projectId'],
             where :{shareLink:shareLink}
@@ -95,24 +94,21 @@ router.post('/get/project-result-from-link', async(req, res) =>{
         }
     
         const votedata = await Promise.all(projectuser_data.rows.map(async function(x) {
-            return await VoteData.findOne({ where:{id:x.dataValues.id}});
+            return await VoteData.findAll({ where:{id:x.dataValues.id}});
         }));
+
     
-        const user_name = await Promise.all(projectuser_data.rows.map(async function(x) {
-            return await User.findOne({attributes:['name'], where:{userId: x.dataValues.userId}})
-        }));
-    
-        if (!votedata || !user_name){
+        if (!votedata){
             return res.status(202).json({
                 code: 202,
                 message: '존재하지 않는 유저입니다.',
                 }); 
         }
+
         return res.json({
             code: 200,
             count:projectuser_data.count,
-            votedata: JSON.stringify(votedata),
-            user_name: JSON.stringify(user_name)
+            votedata: JSON.stringify(votedata)
         });
         
     } catch (error) {
@@ -168,6 +164,7 @@ router.post('/get/link-data', async(req,res) =>{
 // 프로젝트 생성 api -> project, projectuser테이블 업데이트
 router.post('/create/project', async(req, res) =>{
    const {name, userId, startDate, endDate, inviteLink} = req.body;
+
     try {
         // project생성
         const project_Data = await Project.create({
@@ -176,6 +173,7 @@ router.post('/create/project', async(req, res) =>{
             endDate:endDate,
             inviteLink:inviteLink
         });
+
         // projectuser 생성
         const projectuser_Date = await ProjectUser.create({
             projectId:project_Data.dataValues.projectId,
@@ -213,14 +211,10 @@ router.post('/get/project-result', async (req, res) =>{
         }
     
         const votedata = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
-            return await VoteData.findOne({attributes:['date'], where:{id:x.dataValues.id}});
+            return await VoteData.findOne({where:{id:x.dataValues.id}});
         }));
     
-        const user_name = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
-            return await User.findOne({attributes:['name'], where:{userId: x.dataValues.userId}})
-        }));
-    
-        if (!votedata && !user_name){
+        if (!votedata){
             return res.status(202).json({
                 code: 202,
                 message: '존재하지 않는 유저입니다.',
@@ -230,8 +224,7 @@ router.post('/get/project-result', async (req, res) =>{
         return res.json({
             code: 200,
             count: projectuser_id_userid.count,
-            votedata: JSON.stringify(votedata),
-            user_name: JSON.stringify(user_name)
+            votedata: JSON.stringify(votedata)
         });
     } catch (error) {
         console.error(error);
