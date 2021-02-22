@@ -9,6 +9,40 @@ url 예시
 localhost:5000/v1/user
 */
 
+//get/myProject
+router.post('/get/myProject', async(req, res)=>{
+    const {email} = req.body;
+    try {
+        const userId = await User.findOne({
+            where:{email:email},
+            attributes:['userId'],
+            raw:true
+        });
+        if (!userId){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 유저입니다.'
+            });
+        }
+
+        const projedId = await ProjectUser.findAll({
+            where:{userId:userId.userId, isManager:1},
+            attributes:['projectId'],
+            raw:true
+        });
+
+        return res.json({
+            code: 200,
+            projectId: JSON.stringify(projedId)
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
 
 // save/sharedLink
 router.post('/save/shareLink', async(req, res) =>{

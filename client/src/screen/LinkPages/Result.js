@@ -28,8 +28,8 @@ const Result = () => {
     };
 
     function jointpars(apiData){
-        var voteData = voteDataParse(apiData);
-        var userName = nameParse(apiData);
+        var voteData = JSON.parse(apiData.voteData);
+        var userName = JSON.parse(apiData.user_name);
         voteData = voteData.filter(function (element, idx){
             if (element) return element.date;
             else userName.splice(idx,1);
@@ -51,13 +51,6 @@ const Result = () => {
     useEffect(async () =>{
         await fetchApi().then(res => jointpars(res)).then(res => setApiData(res));
     },[]);
-
-    function voteDataParse(req){
-        return JSON.parse(req.votedata);
-    };
-    function nameParse(req){
-        return JSON.parse(req.user_name);
-    }
 
     function fetchApi(){
         var url = 'http://localhost:5000/v1/get/project-result';
