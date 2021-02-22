@@ -10,6 +10,13 @@ import { ListItemSecondaryAction } from '@material-ui/core';
 
 // props를 통해 projectID를 전달받은 후 해당 프로젝트 반환
 
+function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 3 | 8);
+      return v.toString(16);
+    });
+}
+
 const Result = (projectId) => {
     const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([
@@ -17,6 +24,7 @@ const Result = (projectId) => {
            votedata:""
         }
     ]);
+    const [shareLink,] = useState('http://localhost:3000/invite/'+getUUID());
 
     function parse(str) {
         var y = str.substr(0,4);
@@ -54,6 +62,12 @@ const Result = (projectId) => {
             return res.data;
         })
     }
+    function fetchApi2(){
+        var url = 'http://localhost:5000/v1/save/shareLink';
+        return axios.post(url, {projectId:projectId, shareLink:shareLink}).then(function (res) {
+            return res.data;
+        })
+    }
 
 
     function tileClassName(params){
@@ -75,6 +89,9 @@ const Result = (projectId) => {
             :  "Loading"
             }
             </div>
+            <Link to={{pathname: './copylink', value: inviteLink}}>
+                <button className = 'indexBtn' onClick={fetchApi2} disabled={false}>결과 공유하기</button>
+            </Link>
         </div>
     );
 

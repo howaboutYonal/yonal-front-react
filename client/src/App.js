@@ -76,7 +76,7 @@ function App() {
                   <button>외부링크</button>
           </Link>
           <Route path="/link" component={LinkPage}/>
-          <Route path="/invite" component={ResultForGuest}/>
+          <Route path="/share" component={ResultForGuest}/>
         </BrowserRouter>
       </div>
   );
