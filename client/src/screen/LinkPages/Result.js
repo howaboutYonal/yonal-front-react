@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../calendar.css';
 import axios from 'axios';
+import { ListItemSecondaryAction } from '@material-ui/core';
 
 /*  참여한 모든 유저의 date데이터를 api로 불러온다.
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
@@ -11,57 +12,83 @@ import axios from 'axios';
 
 const Result = () => {
     const [value, ] = useState(new Date());
-    const [test, setTest] = useState([
-        // {
-        //     customers:""
-        // }
-    ]);
-    const [users, setUsers] = useState([
+    const [apiData, setApiData] = useState([
         {
-            users:""
-        }
-    ]);
-    const [voteData, setVoteData] = useState([
-        {
-            votedata:""
+           user:"",
+           votedata:""
         }
     ]);
 
-    useEffect(() =>{
-        // callApi()
-        //     .then(res => setTest({customers: res}))
-        //     .catch(err => console.log(err));
-        fetchApi().then(console.log(test));
-    },[]);
-
-    async function callApi(){
-        const response = await fetch('/api/user');
-        const body = await response.json();
-        return body;
+    function parse(str) {
+        var y = str.substr(0,4);
+        var m = str.substr(4,2);
+        var d = str.substr(6,2);
+        var r = new Date(y,m-1,d);
+        return  r;
     };
 
-    const fetchApi = async() =>{
-        const res = await axios.post('http://localhost:5000/v1/get/project-result',{
-            projectId: 0
-        }).then(result => console.log(result.data.user_name,result.data.votedata));
-    };
+    function jointpars(apiData){
+        var voteData = voteDataParse(apiData);
+        var userName = nameParse(apiData);
+        voteData = voteData.filter(function (element, idx){
+            if (element) return element.date;
+            else userName.splice(idx,1);
+        });
 
-    function tileClassName(params){
-        if(params.view === 'month' && !(test.customers.length ===0))
-        if(test.customers.some(x => x.selectedday === params.date.valueOf().toString()))
-            return 'selected_day';
+        var joint = [];
+        for( var i= 0;i<voteData.length;i++){
+            joint = [
+                ...joint,
+                {
+                    user:userName[i].name,
+                    votedata:voteData[i].date
+                }
+            ]
+        }
+        return joint;
     }
     
+    useEffect(async () =>{
+        await fetchApi().then(res => jointpars(res)).then(res => setApiData(res));
+    },[]);
+
+    function voteDataParse(req){
+        return JSON.parse(req.votedata);
+    };
+    function nameParse(req){
+        return JSON.parse(req.user_name);
+    }
+
+    function fetchApi(){
+        var url = 'http://localhost:5000/v1/get/project-result';
+        return axios.post(url, {projectId:0}).then(function (res) {
+            return res.data;
+        })
+    }
+
+
+    function tileClassName(params){
+        if(params.view === 'month' && !(apiData.length ===0))
+        if(apiData.some(x => parse(x.votedata.replaceAll('-','')).valueOf() === params.date.valueOf()))
+            return 'selected_day';
+    }
+
     return (
         <div>
             <h1>종합된 날짜</h1>
-            {test.customers ? 
+            <div>
+            {apiData ?<div>
             <Calendar className="calendar"
-            value = {value}
-            minDate = {value}
-            tileClassName = {tileClassName} /> : ""}
+                value = {value}
+                minDate = {value}
+                tileClassName = {tileClassName} 
+            /> </div>
+            :  "Loading"
+            }
+            </div>
         </div>
     );
+
 }
 
 export default Result;

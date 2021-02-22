@@ -3,9 +3,8 @@ import React, {useState} from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import {BrowserRouter, Route, Link} from 'react-router-dom'
-import LinkPage from './screen/LinkPage'
-import Result from './screen/Result'
 import yonal_logo from './image/yonal_logo.png'
+import LinkPage from './screen/LinkPage'
 import HomePage from './screen/HomePage'
 import CreateProject from './screen/CreateProject'
 import CopyLink from './screen/CopyLink'
