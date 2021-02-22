@@ -43,7 +43,7 @@ const HomePage = ({location}) => {
         <Route path="/home" component={Main}/>
         <Route path="/create" component={CreateProject}/>
         <Route path="/copylink" component={CopyLink}/>
-        <Route path="/result" component={ResultForManager}/>
+        <Route path="/totalcal" component={ResultForManager}/>
       </BrowserRouter>
     </div>
     :

@@ -13,7 +13,7 @@ const LinkPage = () => {
             <Link to='./invited'>
                 <button>초대링크</button>
             </Link>
-            <Link to='./totalcal'>
+            <Link to='./share'>
                 <button>결과링크</button>
             </Link>
             <Route path="/link" component={this}/>
@@ -21,7 +21,7 @@ const LinkPage = () => {
             <Route path="/guest/" component={Guest}/>
             <Route path="/vote" component={Vote}/>
             <Route path='/calendar' component={CalendarComponent}/>
-            <Route path="/totalcal" component={ResultForGuest}/>
+            <Route path="/share" component={ResultForGuest}/>
         </BrowserRouter>
         </div>
     );
