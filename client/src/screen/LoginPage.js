@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {BrowserRouter, Route, Link} from 'react-router-dom'
+import GoogleButton from '../component/GoogleButton'
 
 const LoginPage = () => {
     return (
         <BrowserRouter>
-            {/* <Route path="/main" component={Main}/>
-            <Route path="/create" component={CreateProject}/> */}
-            {/* <Route path="/2" component={InvitedUser2}/> */}
+            <GoogleButton></GoogleButton>
         </BrowserRouter>
     );
 }

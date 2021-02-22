@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 import Guest from './LinkPages/Guest'
 import Vote from './LinkPages/Vote'
