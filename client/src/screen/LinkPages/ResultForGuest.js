@@ -28,7 +28,7 @@ const Result = () => {
     };
 
     function jointpars(apiData){
-        var voteData = JSON.parse(apiData.voteData);
+        var voteData = JSON.parse(apiData.votedata);
         var userName = JSON.parse(apiData.user_name);
         voteData = voteData.filter(function (element, idx){
             if (element) return element.date;

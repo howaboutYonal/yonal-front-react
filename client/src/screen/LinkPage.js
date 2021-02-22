@@ -4,7 +4,7 @@ import Guest from './LinkPages/Guest'
 import Vote from './LinkPages/Vote'
 import CalendarComponent from './LinkPages/CalendarComponent'
 import InvitedHome from './LinkPages/InvitedHome'
-import Result from './LinkPages/Result'
+import ResultForGuest from './LinkPages/ResultForGuest'
 
 const LinkPage = () => {
     return (
@@ -21,7 +21,7 @@ const LinkPage = () => {
             <Route path="/guest/" component={Guest}/>
             <Route path="/vote" component={Vote}/>
             <Route path='/calendar' component={CalendarComponent}/>
-            <Route path="/totalcal" component={Result}/>
+            <Route path="/totalcal" component={ResultForGuest}/>
         </BrowserRouter>
         </div>
     );
