@@ -25,7 +25,7 @@ const ResultForManager = ({location}) => {
            votedata:""
         }
     ]);
-    const [shareLink,] = useState('http://localhost:3000/invite/'+getUUID());
+    const [shareLink,] = useState('http://localhost:3000/share/'+getUUID());
 
     function parse(str) {
         var y = str.substr(0,4);

@@ -3,12 +3,17 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../calendar.css';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles'
 import { ListItemSecondaryAction } from '@material-ui/core';
 
 /*  참여한 모든 유저의 date데이터를 api로 불러온다.
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
 
 // projectId는 링크를 통해 유추한다.
+
+const useStyles = makeStyles((thems) =>{
+
+});
 
 const ResultForGuest = () => {
     const [value, ] = useState(new Date());
@@ -60,8 +65,10 @@ const ResultForGuest = () => {
 
     function tileClassName(params){
         if(params.view === 'month' && !(apiData.length ===0))
-        if(apiData.some(x => parse(x.votedata.replaceAll('-','')).valueOf() === params.date.valueOf()))
+        if(apiData.some(x => parse(x.votedata.replaceAll('-','')).valueOf() === params.date.valueOf())){
+            console.log(params);
             return 'selected_day';
+        }
     }
 
     return (
