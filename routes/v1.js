@@ -12,6 +12,9 @@ localhost:5000/v1/user
 //get/myProject
 router.post('/get/myProject', async(req, res)=>{
     const {email} = req.body;
+    console.log(email);
+// router.use('/test/:email', async(req, res)=>{
+//     const email = req.params.email;
     try {
         const userId = await User.findOne({
             where:{email:email},
@@ -28,12 +31,16 @@ router.post('/get/myProject', async(req, res)=>{
         const projedId = await ProjectUser.findAll({
             where:{userId:userId.userId, isManager:1},
             attributes:['projectId'],
+            include:{
+                attributes:['name'],
+                model: Project
+            },
             raw:true
         });
 
         return res.json({
             code: 200,
-            projectId: JSON.stringify(projedId)
+            project_data: projedId
         });
     } catch (error) {
         console.error(error);

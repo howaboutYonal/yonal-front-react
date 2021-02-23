@@ -10,7 +10,7 @@ import { ListItemSecondaryAction } from '@material-ui/core';
 
 // projectId는 링크를 통해 유추한다.
 
-const Result = () => {
+const ResultForGuest = () => {
     const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([
         {
@@ -28,6 +28,7 @@ const Result = () => {
 
     function jointpars(apiData){
         var voteData = JSON.parse(apiData.votedata);
+        console.log(apiData);
         voteData = voteData[0].filter(function (element){
             if (element) return element.date;
         });
@@ -81,4 +82,4 @@ const Result = () => {
 
 }
 
-export default Result;
+export default ResultForGuest;

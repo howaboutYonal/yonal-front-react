@@ -7,6 +7,7 @@ import CreateProject from '../screen/HomePages/CreateProject'
 import CopyLink from '../screen/HomePages/CopyLink'
 import ResultForManager from '../screen/HomePages/ResultForManager'
 import GoogleButton from '../component/GoogleButton'
+import ResultForGuest from './LinkPages/ResultForGuest'
 
 const HomePage = () => {
   const [isLogin, setIsLogin] = useState(null);
@@ -60,6 +61,7 @@ const HomePage = () => {
           </Link>
           <Route path="/homepage" component={this}/>
           <Route path="/link" component={LinkPage}/>
+          <Route path="/share" component={ResultForGuest}/>
         </BrowserRouter>
   </div>
   );

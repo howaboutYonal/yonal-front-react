@@ -18,7 +18,7 @@ function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
     });
 }
 
-const Result = (projectId) => {
+const ResultForManager = ({location}) => {
     const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([
         {
@@ -59,13 +59,13 @@ const Result = (projectId) => {
 
     function fetchApi(){
         var url = 'http://localhost:5000/v1/get/project-result';
-        return axios.post(url, {projectId:projectId}).then(function (res) {
+        return axios.post(url, {projectId:location.projectId}).then(function (res) {
             return res.data;
         })
     }
     function fetchApi2(){
         var url = 'http://localhost:5000/v1/save/shareLink';
-        return axios.post(url, {projectId:projectId, shareLink:shareLink}).then(function (res) {
+        return axios.post(url, {projectId:location.projectId, shareLink:shareLink}).then(function (res) {
             return res.data;
         })
     }
@@ -98,4 +98,4 @@ const Result = (projectId) => {
 
 }
 
-export default Result;
+export default ResultForManager;
