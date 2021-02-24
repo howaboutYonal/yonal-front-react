@@ -30,7 +30,7 @@ const Main = ({location}) => {
             <Link to='./totalcal'>
                 <button className = 'indexBtn' projectId="1">아직미완</button>
             </Link>
-            <Link to='./create'>
+            <Link to={{pathname: './create', email: myEmail}}>
                 <button className = 'indexBtn'>프로젝트 만들기</button>
             </Link>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles'
 import {Link} from 'react-router-dom'
@@ -18,31 +18,25 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-function getTimeStamp() {
 
-    var d = new Date();
-    var s =
-        leadingZeros(d.getFullYear(), 2) + '-' +
-        leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate(), 2);
-
-    return s;
-}
-
-function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 3 | 8);
-      return v.toString(16);
-    });
-}
-
-const CreateProject = () => {
+const CreateProject = ({location}) => {
     
     const classes = useStyles();
+    const [myId, setMyId] = useState(null);
     const [name, setName] = useState(null);
     const [startDate, setStartDate] = useState(getTimeStamp());
     const [endDate, setEndDate] = useState(getTimeStamp());
     const [inviteLink, ] = useState('http://localhost:3000/invite/'+getUUID());
+
+    useEffect(async () =>{
+        console.log(location.email);
+        await axios.post('http://localhost:5000/v1/get/userId', {
+            email: location.email
+        }).then(function(res){
+            console.log(res.data.userId);
+            setMyId(res.data.userId);
+        });
+    },[])
 
     const fetchApi = async() => {
         const res = await axios.post('http://localhost:5000/v1/create/project', {
@@ -53,7 +47,25 @@ const CreateProject = () => {
         });
         console.log(res.data);
     };
+
+    function getTimeStamp() {
+
+        var d = new Date();
+        var s =
+            leadingZeros(d.getFullYear(), 2) + '-' +
+            leadingZeros(d.getMonth() + 1, 2) + '-' +
+            leadingZeros(d.getDate(), 2);
     
+        return s;
+    }
+    
+    function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 3 | 8);
+          return v.toString(16);
+        });
+    }
+
     return (
         <div>
             <TextField 

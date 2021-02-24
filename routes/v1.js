@@ -80,6 +80,37 @@ router.post('/save/shareLink', async(req, res) =>{
     }
 });
 
+// userEmail -> 유저 아이디 불러오기
+router.post('/get/userId', async(req,res) =>{
+    const {userEmail} = req.body;
+    console.log('hu');
+    try {
+        const userId = await User.findOne({
+            attributes:['userId'],
+            where:{email:userEmail}
+        });
+        
+        if(!userId){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 유저입니다.'
+            })
+        }
+
+        return res.json({
+            code: 200,
+            userId: userId,
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
+
 // sharedLink로 프로젝트 매칭 결과 호출
 router.post('/get/project-result-from-link', async(req, res) =>{
     const {shareLink} = req.body;
