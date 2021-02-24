@@ -19,6 +19,12 @@ const ResultForGuest = () => {
     const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [flag, setFlag] = useState(false);
+
+    useEffect(()=>{
+        if(isLoading)
+            setFlag(true);
+    },[isLoading]);
 
     useEffect(async () =>{
         setIsLoading(false);
@@ -67,14 +73,13 @@ const ResultForGuest = () => {
     
     function tileClassName(params){
         if(!(apiData.length===0))
-            for(var i=0;i<apiData.length;i++)
-                return comparFerUser(params,i);
+            return apiData.map(i=>comparFerUser(params,i));
     }
 
     function comparFerUser(params,idx){
-        if(params.view === 'month' && !(apiData[idx].length ===0))
-            if(apiData[idx].votedata.some(x => parse(x.votedata.replaceAll('-','')).valueOf() === params.date.valueOf())){
-                console.log(params,'finish');
+        if(params.view === 'month' && idx)
+            if(idx.votedata.some(x => parse(x.votedata.replaceAll('-','')).valueOf() === params.date.valueOf())){
+                console.log(params,'finish',idx);
                 return 'selected_day';
             }
     }
@@ -87,7 +92,7 @@ const ResultForGuest = () => {
             <Calendar className="calendar"
                 value = {value}
                 minDate = {value}
-                tileClassName = {tileClassName } 
+                tileClassName = {flag?tileClassName:"" } 
             />
             : "Loading"
             }
