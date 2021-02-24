@@ -6,19 +6,19 @@ const Main = ({location}) => {
     const myName = location.name;
     const myEmail = location.email;
     const myImg = location.image;
-    const [myProjects, setMyProjects] = useState([]);
+    const [myProjects, setMyProjects] = useState(''
+        // projectId: '',
+        // ProjectName: '',
+    );
 
     useEffect(async () =>{
         await axios.post('http://localhost:5000/v1/get/myProject', {
             email: myEmail
         }).then(function(res){
-            // [{"projectId":1},{"projectId":413153}]
-            console.log(res);
-            console.log(res.data.project_data[0]);
-            setMyProjects([res.data.project_data[0]]);
+            console.log(res.data.project_data);
+            // setMyProjects(res.data.project_data);
         });
     },[])
-
 
     return (
         <div>
