@@ -11,32 +11,42 @@ import { ListItemSecondaryAction } from '@material-ui/core';
 
 // projectId는 링크를 통해 유추한다.
 
-const useStyles = makeStyles((thems) =>{
-
+const useStyles = makeStyles({
+    foo: props => ({
+        backgroundColor: props.backgroundColor,
+    }),
+    bar: {
+        // CSS property
+        color: props => props.color,
+    },
 });
+    
+
 
 const ResultForGuest = () => {
+    const props = { backgroundColor: 'black', color: '#284b72' };
+    const classes = useStyles(props);
+
     const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [flag, setFlag] = useState(false);
-
+    useEffect(async () =>{
+        if(flag) setFlag(false);
+        setIsLoading(false);
+        await fetchApi().then(res => setApiData(res)).then(setIsLoading(true));   
+    },[]);
     useEffect(()=>{
-        if(isLoading)
-            setFlag(true);
+        if(isLoading) setFlag(true);
     },[isLoading]);
 
-    useEffect(async () =>{
-        setIsLoading(false);
-        await fetchApi().then(res => setApiData(res)).then(setIsLoading(true));    
-    },[]);
+
 
     function parse(str) {
         var y = str.substr(0,4);
         var m = str.substr(4,2);
-        var d = str.substr(6,2);
-        var r = new Date(y,m-1,d);
-        return  r;
+        var d = str.substr(6,2); 
+        return  new Date(y,m-1,d);
     };
     
     function jointpars(apiData){
@@ -79,8 +89,8 @@ const ResultForGuest = () => {
     function comparFerUser(params,idx){
         if(params.view === 'month' && idx)
             if(idx.votedata.some(x => parse(x.votedata.replaceAll('-','')).valueOf() === params.date.valueOf())){
-                console.log(params,'finish',idx);
-                return 'selected_day';
+                console.log(params,'finish',idx,flag);
+                return `${classes.foo} ${classes.bar}`;
             }
     }
  
