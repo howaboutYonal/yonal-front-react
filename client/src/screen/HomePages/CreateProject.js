@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const CreateProject = ({location}) => {
     
     const classes = useStyles();
+    const [user_email,] = useState(location.email);
     const [myId, setMyId] = useState(null);
     const [name, setName] = useState(null);
     const [startDate, setStartDate] = useState(getTimeStamp());
@@ -29,11 +30,11 @@ const CreateProject = ({location}) => {
     const [inviteLink, ] = useState('http://localhost:3000/invite/'+getUUID());
 
     useEffect(async () =>{
-        console.log(location.email);
+        console.log(user_email, 'in front');
         await axios.post('http://localhost:5000/v1/get/userId', {
-            email: location.email
+            email: user_email
         }).then(function(res){
-            console.log(res.data.userId);
+            console.log(res.data.userId,'return check');
             setMyId(res.data.userId);
         });
     },[])
@@ -45,7 +46,6 @@ const CreateProject = ({location}) => {
             endDate:endDate,
             inviteLink:inviteLink
         });
-        console.log(res.data);
     };
 
     function getTimeStamp() {

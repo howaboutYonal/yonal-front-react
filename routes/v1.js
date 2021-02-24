@@ -12,9 +12,7 @@ localhost:5000/v1/user
 //get/myProject
 router.post('/get/myProject', async(req, res)=>{
     const {email} = req.body;
-    console.log(email);
-// router.use('/test/:email', async(req, res)=>{
-//     const email = req.params.email;
+
     try {
         const userId = await User.findOne({
             where:{email:email},
@@ -82,12 +80,11 @@ router.post('/save/shareLink', async(req, res) =>{
 
 // userEmail -> 유저 아이디 불러오기
 router.post('/get/userId', async(req,res) =>{
-    const {userEmail} = req.body;
-    console.log('hu');
+    const {email} = req.body;
     try {
         const userId = await User.findOne({
             attributes:['userId'],
-            where:{email:userEmail}
+            where:{email:email}
         });
         
         if(!userId){
