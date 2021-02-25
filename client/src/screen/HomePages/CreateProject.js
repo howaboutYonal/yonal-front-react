@@ -30,11 +30,9 @@ const CreateProject = ({location}) => {
     const [inviteLink, ] = useState('http://localhost:3000/invite/'+getUUID());
 
     useEffect(async () =>{
-        console.log(user_email, 'in front');
         await axios.post('http://localhost:5000/v1/get/userId', {
             email: user_email
         }).then(function(res){
-            console.log(res.data.userId,'return check');
             setMyId(res.data.userId);
         });
     },[])
@@ -42,6 +40,7 @@ const CreateProject = ({location}) => {
     const fetchApi = async() => {
         const res = await axios.post('http://localhost:5000/v1/create/project', {
             name:name,
+            userId:myId,
             startDate:startDate,
             endDate:endDate,
             inviteLink:inviteLink
