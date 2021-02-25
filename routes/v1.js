@@ -38,7 +38,8 @@ router.post('/get/myProject', async(req, res)=>{
 
         return res.json({
             code: 200,
-            project_data: projectData
+            projectId: projectData.projectId,
+            projectName: projectData.name
         });
     } catch (error) {
         console.error(error);
