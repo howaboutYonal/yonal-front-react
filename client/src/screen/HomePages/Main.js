@@ -7,16 +7,25 @@ const Main = ({location}) => {
     const myEmail = location.email;
     const myImg = location.image;
     const myProjects = [];
+    
+    function myButton(arr) {
+        arr.forEach(function(item){
+            var id = item['projectId'];
+            var name = item['Projects.name'];
+            console.log(id, name);
+        })
+    }
 
     useEffect(async () =>{
         await axios.post('http://localhost:5000/v1/get/myProject', {
             email: myEmail
         }).then(function(res){
-            const arr = res.data.project_data.slice();
-            for(var i=0; i<arr.length; i++){
-                myProjects.push(arr[i]);
-            }
+            const arr = res.data.projectData.slice();
+            arr.forEach(function(item){
+                myProjects.push(item);
+            })
             console.log(myProjects);
+            myButton(myProjects)
         });
     },[])
     
