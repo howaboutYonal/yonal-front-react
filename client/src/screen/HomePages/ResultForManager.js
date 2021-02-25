@@ -91,7 +91,7 @@ const ResultForManager = ({location}) => {
             return jointpars(res.data);
         });
     }
-    function fetchApi2(){
+    async function fetchApi2(){
         var url = 'http://localhost:5000/v1/save/shareLink';
         return axios.post(url, {projectId:location.projectId, shareLink:shareLink}).then(function (res) {
             return res.data;
