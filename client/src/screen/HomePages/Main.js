@@ -6,20 +6,20 @@ const Main = ({location}) => {
     const myName = location.name;
     const myEmail = location.email;
     const myImg = location.image;
-    const [myProjects, setMyProjects] = useState(''
-        // projectId: '',
-        // ProjectName: '',
-    );
+    const myProjects = [];
 
     useEffect(async () =>{
         await axios.post('http://localhost:5000/v1/get/myProject', {
             email: myEmail
         }).then(function(res){
-            console.log(res.data.project_data);
-            // setMyProjects(res.data.project_data);
+            const arr = res.data.project_data.slice();
+            for(var i=0; i<arr.length; i++){
+                myProjects.push(arr[i]);
+            }
+            console.log(myProjects);
         });
     },[])
-
+    
     return (
         <div>
             <div><img className='profile' src={myImg}/></div>

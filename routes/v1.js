@@ -26,7 +26,7 @@ router.post('/get/myProject', async(req, res)=>{
             });
         }
 
-        const projedId = await ProjectUser.findAll({
+        const projectData = await ProjectUser.findAll({
             where:{userId:userId.userId, isManager:1},
             attributes:['projectId'],
             include:{
@@ -38,7 +38,7 @@ router.post('/get/myProject', async(req, res)=>{
 
         return res.json({
             code: 200,
-            project_data: projedId
+            project_data: projectData
         });
     } catch (error) {
         console.error(error);
