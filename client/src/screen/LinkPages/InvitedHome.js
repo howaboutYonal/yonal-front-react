@@ -28,16 +28,18 @@ const InvitedHome = ({location}) => {
 
     
     return (
-        <div>
+        <div className='App'>
             <div className='gray-background'>
                 <BoxDescription icon={icon_plan} title="프로젝트 이름" content={projectTitle}/>
                 <BoxDescription icon={icon_people} title="현재 참여 인원" content={`${memberNum} 명`}/>
                 <BoxDescription icon={icon_calendar} title="매칭 일정" content={projectDate}/>
             </div>
 
-            <Link to={{pathname: '/guest', projectId: projectId, projectTitle: projectTitle}}>
-                <button className = 'btn'>입장하기</button>
-            </Link>
+            <div >
+                <Link to={{pathname: '/guest', projectId: projectId, projectTitle: projectTitle}}>
+                    <button className = 'btn'>입장하기</button>
+                </Link>
+            </div>
         </div>
     );
 }
