@@ -7,6 +7,7 @@ const Main = ({location}) => {
     const myEmail = location.email;
     const myImg = location.image;
     const myProjects = [];
+    const [projectId, setProjectId] = useState(0);
     
     function myButton(arr) {
         arr.forEach(function(item){
@@ -36,8 +37,8 @@ const Main = ({location}) => {
             <div>
                 {myProjects}
             </div>
-            <Link to='./totalcal'>
-                <button className = 'indexBtn' projectId="1">아직미완</button>
+            <Link to={{pathname:'./totalcal', projectId:projectId}}>
+                <button className = 'indexBtn' >아직미완</button>
             </Link>
             <Link to={{pathname: './create', email: myEmail}}>
                 <button className = 'indexBtn'>프로젝트 만들기</button>

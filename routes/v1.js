@@ -236,7 +236,7 @@ router.post('/get/project-result', async (req, res) =>{
     try {
         const projectuser_id_userid = await ProjectUser.findAndCountAll({
             attributes:['id', 'userId'],
-            where:{projectId: project_id}
+            where:{projectId: project_id, isManager:0}
         });
         if (!projectuser_id_userid){
             return res.status(202).json({
@@ -246,7 +246,7 @@ router.post('/get/project-result', async (req, res) =>{
         }
     
         const votedata = await Promise.all(projectuser_id_userid.rows.map(async function(x) {
-            return await VoteData.findOne({where:{id:x.dataValues.id}});
+            return await VoteData.findAll({where:{id:x.dataValues.id}});
         }));
     
         if (!votedata){

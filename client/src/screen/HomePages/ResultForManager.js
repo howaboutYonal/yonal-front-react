@@ -40,6 +40,7 @@ const ResultForManager = ({location}) => {
     const [apiData, setApiData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [flag, setFlag] = useState(false);
+    const [projectId,] =useState(location.projectId);
 
     const [shareLink,] = useState('http://localhost:3000/share/'+getUUID());
 
@@ -81,12 +82,13 @@ const ResultForManager = ({location}) => {
                 }
             ]
         }
-
+        console.log(totaljoint);
         return totaljoint;
     }
 
     async function fetchApi(){
-        return axios.post('http://localhost:5000/v1/get/project-result', {projectId:location.projectId}).then(function (res) {
+        return axios.post('http://localhost:5000/v1/get/project-result', {projectId:projectId}).then(function (res) {
+            console.log(res);
             setWeight((select.length/res.data.count));
             return jointpars(res.data);
         });
