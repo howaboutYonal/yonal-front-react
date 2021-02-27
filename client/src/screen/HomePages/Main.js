@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import ProjectButton from './ProjectButton'
 
 const Main = ({location}) => {
     const myName = location.name;
     const myEmail = location.email;
     const myImg = location.image;
     const myProjects = [];
-    const [projectId, setProjectId] = useState(0);
     
-    function myButton(arr) {
+    function setMyProjects(arr) {
         arr.forEach(function(item){
             var id = item['projectId'];
             var name = item['Projects.name'];
-            console.log(id, name);
+            myProjects.push({id, name});
         })
     }
 
@@ -22,27 +22,19 @@ const Main = ({location}) => {
             email: myEmail
         }).then(function(res){
             const arr = res.data.projectData.slice();
-            arr.forEach(function(item){
-                myProjects.push(item);
-            })
+            setMyProjects(arr);
             console.log(myProjects);
-            myButton(myProjects)
         });
     },[])
     
     return (
         <div>
             <div><img className='profile' src={myImg}/></div>
-            <div className='logoText'>내 프로젝트</div>
-            <div>
-                {myProjects}
-            </div>
-            <Link to={{pathname:'./totalcal', projectId:projectId}}>
-                <button className = 'indexBtn' >아직미완</button>
-            </Link>
             <Link to={{pathname: './create', email: myEmail}}>
                 <button className = 'indexBtn'>프로젝트 만들기</button>
             </Link>
+            <div className='logoText'>내 프로젝트</div>
+            <ProjectButton value={myProjects}/>
         </div>
 
     );
