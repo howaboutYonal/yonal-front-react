@@ -57,7 +57,7 @@ const HomePage = () => {
           <div> <GoogleButton sendData={sendData}/>
           </div>
           <Link to='./link'>
-              <button>외부링크</button>
+              <button>초대링크</button>
           </Link>
           <Route path="/homepage" component={this}/>
           <Route path="/link" component={LinkPage}/>
