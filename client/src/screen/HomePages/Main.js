@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import ProjectButton from './ProjectButton'
+import ProjectButton from '../../component/ProjectButton'
 
 const Main = ({location}) => {
     const myName = location.name;
