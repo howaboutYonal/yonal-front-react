@@ -8,6 +8,8 @@ const Main = ({location}) => {
     const myEmail = location.email;
     const myImg = location.image;
     const myProjects = [];
+    const [flag, setFlag] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     
     function setMyProjects(arr) {
         arr.forEach(function(item){
@@ -18,15 +20,21 @@ const Main = ({location}) => {
     }
 
     useEffect(async () =>{
-        await axios.post('http://localhost:5000/v1/get/myProject', {
-            email: myEmail
-        }).then(function(res){
-            const arr = res.data.projectData.slice();
-            setMyProjects(arr);
-            console.log(myProjects);
-        });
+        if(flag) setFlag(false);
+        await fetchApi().then(res => setMyProjects(res.data.projectData)).then(setIsLoading(true));
+        console.log(myProjects);
     },[])
+
+    useEffect(()=>{
+        if(isLoading) setFlag(true);
+    },[isLoading]);
     
+    async function fetchApi(){
+        return axios.post('http://localhost:5000/v1/get/myProject', {
+            email: myEmail
+        })
+    }   
+
     return (
         <div>
             <div><img className='profile' src={myImg}/></div>
@@ -34,9 +42,10 @@ const Main = ({location}) => {
                 <button className = 'indexBtn'>프로젝트 만들기</button>
             </Link>
             <div className='logoText'>내 프로젝트</div>
-            <ProjectButton value={myProjects}/>
+            {isLoading ?
+            <ProjectButton value={myProjects}/> : "loading"
+            }
         </div>
-
     );
 }
 
