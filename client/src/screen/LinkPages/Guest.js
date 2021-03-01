@@ -14,18 +14,16 @@ function saveData(projectId, nickname) {
 
 const Guest = ({location, history}) => {
     const [nickname, setNickname] = useState('');
+    const projectTitle = location.projectTitle;
     const onClick = () => {
         if(nickname == ''){
             alert("닉네임을 입력해주세요.");
         }else{
             saveData(location.projectId, nickname);
-            history.push({pathname: "/calendar", nickname:nickname, projectId: location.projectId});
+            history.push({pathname: "/calendar", nickname:nickname, projectId: location.projectId, projectTitle:projectTitle});
         }
     }
 
-    const getObject = () => {
-        return `{{pathname: '/vote', nickname: ${nickname}}}`;
-    } 
 
     return (
         <div>

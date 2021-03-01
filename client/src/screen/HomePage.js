@@ -8,8 +8,12 @@ import CopyLink from '../screen/HomePages/CopyLink'
 import ResultForManager from '../screen/HomePages/ResultForManager'
 import GoogleButton from '../component/GoogleButton'
 import ResultForGuest from './LinkPages/ResultForGuest'
+import VoteFinished from './LinkPages/VoteFinished'
+import {withRouter} from 'react-router-dom'
 
-const HomePage = () => {
+import { Button } from '@material-ui/core';
+
+const HomePage = ({history}) => {
   const [isLogin, setIsLogin] = useState(null);
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
@@ -33,13 +37,14 @@ const HomePage = () => {
     isLogin?
     <div className="App">
       <BrowserRouter>
-        <Link to='./'> 
-            <button onClick={Logout}>로그아웃</button>
+        <Link to='./' align='left'> 
+          <button className = 'logoutBtn' onClick={Logout}>로그아웃</button>
         </Link>
         <div className='logoText'>우리 모두 일정 맞추기</div>
         <Link to={{pathname: './home', name:userName, email:userEmail, image:userImage}}>
           <img className='Applogo' src={yonal_logo}/>
         </Link>
+
         <Route path="/homepage" component={this}/>
         <Route path="/home" component={Main}/>
         <Route path="/create" component={CreateProject}/>
@@ -69,4 +74,4 @@ const HomePage = () => {
   );
 }
 
-export default HomePage;
+export default withRouter(HomePage);

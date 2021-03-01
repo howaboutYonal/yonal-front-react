@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
 import Guest from './LinkPages/Guest'
-import Vote from './LinkPages/Vote'
 import CalendarComponent from './LinkPages/CalendarComponent'
 import InvitedHome from './LinkPages/InvitedHome'
+import VoteFinished from './LinkPages/VoteFinished';
 
 const LinkPage = () => {
     return (
@@ -11,8 +11,8 @@ const LinkPage = () => {
         <BrowserRouter>
             <Route path="/link" component={InvitedHome}/>
             <Route path="/guest/" component={Guest}/>
-            <Route path="/vote" component={Vote}/>
             <Route path='/calendar' component={CalendarComponent}/>
+            <Route path='/voteFinished' component={VoteFinished}/>
         </BrowserRouter>
         </div>
     );

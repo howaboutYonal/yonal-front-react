@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles'
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import leadingZeros from 'leadingzero'
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 
-const CreateProject = ({location}) => {
+const CreateProject = ({location, history}) => {
     
     const classes = useStyles();
     const [user_email,] = useState(location.email);
@@ -46,6 +46,15 @@ const CreateProject = ({location}) => {
             inviteLink:inviteLink
         });
     };
+
+    const onClick = () => {
+        if(name == null){
+            alert("프로젝트 이름을 입력해주세요.");
+        }else{
+            fetchApi();
+            history.push({pathname: "/copylink", inviteLink: inviteLink});
+        }
+    }
 
     function getTimeStamp() {
 
@@ -79,8 +88,8 @@ const CreateProject = ({location}) => {
 
             <br></br>
             <div className='period'>
-                start date
-                <form className={classes.container} noValidate>
+                시작 날짜
+                <form className={`classes.container`} noValidate>
                     <TextField
                         id="startdate"
                         type="date"
@@ -94,7 +103,7 @@ const CreateProject = ({location}) => {
                         }}
                     />
                 </form>
-                end date
+                종료 날짜
                 <form className={classes.container} noValidate>
                     <TextField
                         id="enddate"
@@ -110,12 +119,13 @@ const CreateProject = ({location}) => {
                     />
                 </form>
             </div>
-            <Link to={{pathname: './copylink', value: inviteLink}}>
-                <button className = 'indexBtn' onClick={fetchApi} disabled={false}>확인</button>
-            </Link>
-         
+            {/* <Link to={{pathname: './copylink', value: inviteLink}}>
+                <button className = 'btn' onClick={fetchApi} disabled={false}>확인</button>
+            </Link> */}
+            <button className = 'btn' onClick={onClick}>확인</button>
+            
         </div>
     );
 }
 
-export default CreateProject;
+export default withRouter(CreateProject);

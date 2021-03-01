@@ -15,6 +15,7 @@ import axios from 'axios';
 const CalendarComponent = ({location, history}) => {
     const projectId = location.projectId;
     const nickname = location.nickname;
+    const projectTitle = location.projectTitle;
 
     const [days, setDays] = useState([]);
     const [value, ] = useState(new Date());
@@ -39,11 +40,13 @@ const CalendarComponent = ({location, history}) => {
     }
     
     const fetchApi = async() =>{
-               const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
-                   projectId : projectId,// for test
-                   userId :2,// for test
-                   date:days
-               });
+        const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
+            projectId : projectId,// for test
+            userId :2,// for test
+            date:days
+        });
+        history.push({pathname: "/voteFinished", nickname:nickname, projectTitle:projectTitle});
+
     }
 
     function tileClassName(params){
@@ -54,7 +57,7 @@ const CalendarComponent = ({location, history}) => {
     
     return (
         <div>
-            <h1>가능한 날짜</h1>
+            <h3 className='calendarGuide'>가능한 날짜를 선택해 주세요.</h3>
             <Calendar
                 className="calendar"
                 onChange={check_selected_days} 
@@ -63,7 +66,7 @@ const CalendarComponent = ({location, history}) => {
                 tileClassName={tileClassName}
             />
             <Link to='/totalcal'>
-            <button className = 'btn' onClick={fetchApi}>YONAL</button>
+            <button className = 'btn' onClick={fetchApi}>제출하기</button>
             </Link>
         </div>
     );

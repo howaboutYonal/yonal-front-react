@@ -10,7 +10,7 @@ const Main = ({location}) => {
     const projectList = myProjects.map(item => 
         <div>
             <Link to={{pathname:'./totalcal', projectId:item.id}}>
-                <button>{item.name}</button>
+                <button className='projectBox'>{item.name}</button>
             </Link>
         </div>
     );
@@ -39,8 +39,9 @@ const Main = ({location}) => {
         <div>
             <div><img className='profile' src={myImg}/></div>
             <Link to={{pathname: './create', email: myEmail}}>
-                <button className = 'indexBtn'>프로젝트 만들기</button>
+                <button className = 'btn'>새 프로젝트 만들기</button>
             </Link>
+            
             <div className='logoText'>내 프로젝트</div>
             {projectList}
         </div>

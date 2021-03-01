@@ -135,7 +135,7 @@ const ResultForManager = ({location}) => {
             }
             </div>
             <Link to={{pathname: './copylink', value: shareLink}}>
-                <button className = 'indexBtn' onClick={fetchApi2} disabled={false}>결과 공유하기</button>
+                <button className = 'btn' onClick={fetchApi2} disabled={false}>결과 공유하기</button>
             </Link>
         </div>
     );

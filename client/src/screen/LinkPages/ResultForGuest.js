@@ -104,7 +104,7 @@ const ResultForGuest = () => {
  
     return (
         <div>
-            <h1>종합된 날짜</h1>
+            <h3 className='calendarGuide'>종합된 날짜</h3>
             <div>
             {isLoading ?
             <Calendar className="calendar"
