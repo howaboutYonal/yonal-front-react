@@ -16,7 +16,7 @@ const GoogleButton = ({sendData , history}) => {
             user_image:response.getBasicProfile().getImageUrl()
         });
         sendData(response.getBasicProfile().getName(), response.getBasicProfile().getEmail(), response.getBasicProfile().getImageUrl(), true);
-        history.push({pathname: "./home", name:response.getBasicProfile().getName(), email:response.getBasicProfile().getEmail(), image:response.getBasicProfile().getImageUrl()});
+        history.push({pathname: "../home", name:response.getBasicProfile().getName(), email:response.getBasicProfile().getEmail(), image:response.getBasicProfile().getImageUrl()});
     }
 
     const onFailure = (error) => {

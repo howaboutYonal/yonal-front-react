@@ -51,13 +51,15 @@ const HomePage = () => {
     <div className="App">
         <BrowserRouter>
           <div className='logoText'>우리 모두 일정 맞추기</div>
-          <Link to={{pathname: './'}}>
+          <Link to={{pathname: '../'}}>
               <img className='Applogo' src={yonal_logo}/>  
           </Link>
-          <div> <GoogleButton sendData={sendData}/>
+          <div className='gray-background'>
+          요날을 이용하시려면 로그인을 해주세요.
+          <div> <GoogleButton sendData={sendData}/></div>
           </div>
           <Link to='./link'>
-              <button>초대링크</button>
+              <button>임시초대링크</button>
           </Link>
           <Route path="/homepage" component={this}/>
           <Route path="/link" component={LinkPage}/>
