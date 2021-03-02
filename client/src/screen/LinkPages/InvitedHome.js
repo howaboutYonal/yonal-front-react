@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import BoxDescription from '../../component/BoxDescription'
 import icon_plan from '../../image/yonal_icon_plan.png'
 import icon_people from '../../image/yonal_icon_people.png'
@@ -7,9 +7,9 @@ import icon_calendar from '../../image/yonal_icon_calendar.png'
 import axios from 'axios';
 
 
-const InvitedHome = ({location}) => {
-    // const inviteLink = location.inviteLink;
-    // console.log("링크:", location.inviteLink);
+const InvitedHome = ({location, history}) => {
+    const inviteLink = document.location.href;
+    console.log("링크:", inviteLink);
 
     const [projectId, setProjectId] = useState('');
     const [projectTitle, setProjectTitle] = useState('');
@@ -18,7 +18,7 @@ const InvitedHome = ({location}) => {
 
 
     axios.post('http://localhost:5000/v1/get/link-data', {
-        inviteLink:"http://localhost:3000/invited"
+        inviteLink: inviteLink
     }).then(function(res){
         setProjectId(res.data.projectId);
         setProjectTitle(res.data.projectName);
@@ -36,12 +36,17 @@ const InvitedHome = ({location}) => {
             </div>
 
             <div >
-                <Link to={{pathname: '/guest', projectId: projectId, projectTitle: projectTitle}}>
+                {/* <Link to={{pathname: '/guest', projectId: projectId, projectTitle: projectTitle}}>
                     <button className = 'btn'>입장하기</button>
-                </Link>
+                </Link> */}
+
+                <button className = 'btn' onClick={() => { 
+                    history.push({pathname: "/guest", projectId: projectId, projectTitle: projectTitle});
+                }}>입장하기</button>
+                
             </div>
         </div>
     );
 }
 
-export default InvitedHome;
+export default withRouter(InvitedHome);
