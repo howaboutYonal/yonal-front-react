@@ -212,11 +212,12 @@ router.post('/create/project', async(req, res) =>{
         // projectuser 생성
         const projectuser_Date = await ProjectUser.create({
             projectId:project_Data.dataValues.projectId,
-            userId:userId,
+            userId:userId.userId,
             isManager:1
         });
-    
+
         return res.json({
+            what: userId,
             code: 200,
             project: JSON.stringify(project_Data),
             projectuser: JSON.stringify(projectuser_Date)
