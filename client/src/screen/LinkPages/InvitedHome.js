@@ -14,8 +14,10 @@ const InvitedHome = ({location, history}) => {
     const [projectId, setProjectId] = useState('');
     const [projectTitle, setProjectTitle] = useState('');
     const [memberNum, setMemberNum] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [projectDate, setProjectDate] = useState('');
-
+    
 
     axios.post('http://localhost:5000/v1/get/link-data', {
         inviteLink: inviteLink
@@ -23,6 +25,8 @@ const InvitedHome = ({location, history}) => {
         setProjectId(res.data.projectId);
         setProjectTitle(res.data.projectName);
         setMemberNum(res.data.number);
+        setStartDate(res.data.startDate);
+        setEndDate(res.data.endDate);
         setProjectDate(res.data.startDate+' - '+res.data.endDate);
     });
 
@@ -41,7 +45,7 @@ const InvitedHome = ({location, history}) => {
                 </Link> */}
 
                 <button className = 'btn' onClick={() => { 
-                    history.push({pathname: "/guest", projectId: projectId, projectTitle: projectTitle});
+                    history.push({pathname: "/guest", projectId: projectId, projectTitle: projectTitle, startDate:startDate, endDate:endDate});
                 }}>입장하기</button>
                 
             </div>

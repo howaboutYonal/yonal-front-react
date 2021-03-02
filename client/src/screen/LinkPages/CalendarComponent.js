@@ -16,6 +16,8 @@ const CalendarComponent = ({location, history}) => {
     const projectId = location.projectId;
     const nickname = location.nickname;
     const projectTitle = location.projectTitle;
+    const startDate = location.startDate;
+    const endDate = location.endDate;
 
     const [days, setDays] = useState([]);
     const [value, ] = useState(new Date());

@@ -20,7 +20,14 @@ const Guest = ({location, history}) => {
             alert("닉네임을 입력해주세요.");
         }else{
             saveData(location.projectId, nickname);
-            history.push({pathname: "/calendar", nickname:nickname, projectId: location.projectId, projectTitle:projectTitle});
+            history.push({
+                pathname: "/calendar", 
+                nickname:nickname, 
+                projectId: location.projectId, 
+                projectTitle:projectTitle, 
+                startDate:location.startDate, 
+                endDate:location.endDate
+            });
         }
     }
 
