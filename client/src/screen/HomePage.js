@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom'
+import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom'
 import yonal_logo from '../image/yonal_logo.png'
 import Main from '../screen/HomePages/Main'
-import LinkPage from '../screen/LinkPage'
 import CreateProject from '../screen/HomePages/CreateProject'
 import CopyLink from '../screen/HomePages/CopyLink'
 import ResultForManager from '../screen/HomePages/ResultForManager'
 import GoogleButton from '../component/GoogleButton'
 import ResultForGuest from './LinkPages/ResultForGuest'
 import VoteFinished from './LinkPages/VoteFinished'
-import {withRouter} from 'react-router-dom'
-
-import { Button } from '@material-ui/core';
+import Guest from './LinkPages/Guest'
+import CalendarComponent from './LinkPages/CalendarComponent'
+import InvitedHome from './LinkPages/InvitedHome'
 
 const HomePage = ({history}) => {
   const [isLogin, setIsLogin] = useState(null);
@@ -60,14 +59,14 @@ const HomePage = ({history}) => {
               <img className='Applogo' src={yonal_logo}/>  
           </Link>
           <div className='gray-background'>
-          요날을 이용하시려면 로그인을 해주세요.
-          <div> <GoogleButton sendData={sendData}/></div>
+            요날을 이용하시려면 로그인을 해주세요.
+            <div> <GoogleButton sendData={sendData}/></div>
           </div>
-          <Link to='./link'>
-              <button>임시초대링크</button>
-          </Link>
           <Route path="/homepage" component={this}/>
-          <Route path="/link" component={LinkPage}/>
+          <Route path="/invite" component={InvitedHome}/>
+          <Route path="/guest/" component={Guest}/>
+          <Route path='/calendar' component={CalendarComponent}/>
+          <Route path='/voteFinished' component={VoteFinished}/>
           <Route path="/share" component={ResultForGuest}/>
         </BrowserRouter>
   </div>

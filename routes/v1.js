@@ -404,7 +404,7 @@ router.post('/link/new-user', async (req, res) => {
 
         return res.json({
             code: 200,
-            payload: JSON.stringify(projectuser),
+            payload: JSON.stringify(new_project_user),
         });
 
     }catch (error) {
