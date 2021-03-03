@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import BoxDescription from '../../component/BoxDescription'
+import yonal_logo from '../../image/yonal_logo.png'
+import icon_plan from '../../image/yonal_icon_plan.png'
+
+
 import '../calendar.css';
 import axios from 'axios';
 
@@ -59,6 +64,11 @@ const CalendarComponent = ({location, history}) => {
     
     return (
         <div>
+            <BoxDescription icon={icon_plan} title={location.projectTitle}/>
+
+            <div className='logoText'>우리 모두 일정 맞추기</div>
+            <img className='Applogo' src={yonal_logo}/>
+
             <h3 className='calendarGuide'>가능한 날짜를 선택해 주세요.</h3>
             <Calendar
                 className="calendar"

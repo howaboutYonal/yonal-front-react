@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
+import {useMediaQuery} from 'react-responsive'
 import axios from 'axios'
 
-const Main = ({location}) => {
-    const myName = location.name;
-    const myEmail = location.email;
-    const myImg = location.image;
+const LoginUserMain = props => {
+    console.log("lo0cation", props);
+
+    const myName = props.name;
+    const myEmail = props.email;
+    const myImg = props.image;
     const [myProjects, setMyProjects] = useState([]);
+    const isMobile = useMediaQuery ({
+        query : "(max-width : 500px)"
+      })
+    const projectStyle = isMobile? 'mProjectBox' : 'projectBox';
+    const ifGrid = isMobile? '' : 'grid';
+
     const projectList = myProjects.map(item => 
-        <div>
-            <Link to={{pathname:'./totalcal', projectId:item.id}}>
-                <button className='projectBox'>{item.name}</button>
+        <div className={ifGrid}>
+            <Link to={{pathname:'./totalcal', projectId:item.id, projectTitle:item.name}}>
+                <button className={projectStyle}>{item.name}</button>
             </Link>
         </div>
     );
 
+
+
+
+      
     function copyData(arr) {
         const temp = [];
         arr.forEach(function(item){
@@ -48,4 +61,4 @@ const Main = ({location}) => {
     );
 }
 
-export default Main;
+export default LoginUserMain;

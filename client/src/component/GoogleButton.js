@@ -15,8 +15,18 @@ const GoogleButton = ({sendData , history}) => {
             user_email:response.getBasicProfile().getEmail(),
             user_image:response.getBasicProfile().getImageUrl()
         });
-        sendData(response.getBasicProfile().getName(), response.getBasicProfile().getEmail(), response.getBasicProfile().getImageUrl(), true);
-        history.push({pathname: "../home", name:response.getBasicProfile().getName(), email:response.getBasicProfile().getEmail(), image:response.getBasicProfile().getImageUrl()});
+
+        let userName = response.getBasicProfile().getName();
+        let userEmail = response.getBasicProfile().getEmail();
+        let userImage = response.getBasicProfile().getImageUrl();
+
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userEmail", userEmail);
+        localStorage.setItem("userImage", userImage);
+
+        sendData(userName, userEmail, userImage , true);
+        console.log(response);
+        history.push({pathname: "../loginhome", name:userName, email:userEmail, image:userImage});
     }
 
     const onFailure = (error) => {
@@ -26,7 +36,7 @@ const GoogleButton = ({sendData , history}) => {
     }
 
     return(
-        <div>
+        <div className='googleBtn'>
             <GoogleLogin
                 clientId={clientId}
                 responseType={"id_token"}

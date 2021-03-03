@@ -13,13 +13,23 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
   width: 171px;
+}
+
+.alignRight{
+  text-align: right;
+  margin-right: 10px;
+}
+
+.alignCenter{
+  text-align: center;
 }
 
 .profile {
   border-radius: 40%;
+  width: 50px;
 }
-
 
 
 .logoText{
@@ -109,17 +119,23 @@
 }
 
 
-.gray-background{
+.grayBackground{
   width: 300px;
   padding-top: 10px;
   padding-bottom: 10px;
   background: rgba(228, 228, 228, 0.47);
 
-  margin:  20px auto;
-
+  margin: auto;
 }
 
+.mGrayBackground{
+  width: 300px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: rgba(228, 228, 228, 0.47);
+  margin: 100px auto;
 
+}
 
 .btn {
 	background-color:#FF705D;
@@ -149,36 +165,74 @@
   outline: none;
 }
 
+.loginGuide{
+  text-align: center;
+  margin: 30px 10px;
+  width: 80%;
+  bottom: 50%;
+
+  font-size: 18px;
+  padding: 7px 7px;
+
+}
+
 .logoutBtn{
-  background-color:#c9c9c9;
+  background-color: #FFFFFF;
   border-radius:10px;
   border: 0;
-  color:#ffffff;
+  color:#4b4b4b;
   font-size:15px;
   padding: 3px 0;
-
+  
   width: 30%;
   margin-top: 10px;
-  
+}
+
+.googleBtn{
+  text-align: center;
+  size: 15px;
+  margin-top: 100px;
+}
+
+.grid{
+  display: grid;
 }
 
 .projectBox{
+  display: grid;
+  margin: 10px 10px;
+  width: 35%;
+  padding: 14px 10px;
+  border-radius: 13px;
+  border: 0;
+  font-size:15px;
+}
+
+.mProjectBox{
   width: 80%;
   padding: 14px 30px;
   margin-top: 20px;
   border-radius: 13px;
   border: 0;
   font-size:15px;
+  
 }
 
 /*닉네임을 입력해주세요*/
 .nicknameGuide{
   text-align: left;
-  margin-top: 30%;
   margin-left: 23px;
   line-height: 26px;
 
-  position: absolute;
+  width: 80%;
+  bottom: 50%;
+}
+.mNicknameGuide{
+  text-align: left;
+  margin-left: 23px;
+  margin-top: 100px;
+  line-height: 26px;
+
   width: 80%;
   bottom: 50%;
 }
@@ -218,6 +272,10 @@
   bottom: 50%;
 }
 
+.temp{
+  text-align: center;
+  margin-top: 100px;
+}
 
 .rectangle{
   position: absolute;

@@ -5,6 +5,11 @@ import 'react-calendar/dist/Calendar.css';
 import '../calendar.css';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles'
+import yonal_logo from '../../image/yonal_logo.png'
+import icon_plan from '../../image/yonal_icon_plan.png'
+import BoxDescription from '../../component/BoxDescription'
+
+
 
 /*  참여한 모든 유저의 date데이터를 api로 불러온다.
     이렇게 불러온 데이터를 종합하여 캘린더에 출력한다. */
@@ -41,6 +46,7 @@ const ResultForManager = ({location}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [flag, setFlag] = useState(false);
     const [projectId,] =useState(location.projectId);
+    const [projectTitle,] =useState(location.projectTitle);
 
     const [shareLink,] = useState('http://localhost:3000/share/'+getUUID());
 
@@ -121,9 +127,21 @@ const ResultForManager = ({location}) => {
                 return true;
     }
 
+
+    const userName = localStorage.getItem("userName");
+    const userEmail = localStorage.getItem("userEmail");
+    const userImage = localStorage.getItem("userImage");
+
     return (
         <div>
-            <h1>종합된 날짜</h1>
+        <BoxDescription icon={icon_plan} title={projectTitle}/>
+        
+
+        <div className='alignCenter'>
+            <div className='logoText'>우리 모두 일정 맞추기</div>
+            <img className='Applogo' src={yonal_logo}/>
+
+            <h3 className='calendarGuide'>종합된 날짜</h3>
             <div>
             {isLoading ?
             <Calendar className="calendar"
@@ -137,6 +155,7 @@ const ResultForManager = ({location}) => {
             <Link to={{pathname: './copylink', value: shareLink}}>
                 <button className = 'btn' onClick={fetchApi2} disabled={false}>결과 공유하기</button>
             </Link>
+        </div>
         </div>
     );
 
