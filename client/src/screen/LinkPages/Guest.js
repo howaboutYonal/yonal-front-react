@@ -21,7 +21,7 @@ const Guest = ({location, history}) => {
         query : "(max-width : 500px)"
     })
     const nicknameGuide = isMobile? 'mNicknameGuide' : 'nicknameGuide';
-
+    const btn = isMobile? 'mBtn' : 'btn';
 
     const onClick = () => {
         if(nickname == ''){
@@ -49,7 +49,7 @@ const Guest = ({location, history}) => {
             <label>
                 <input className= "inputField" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder = "별명" />
             </label>
-            <input type="button" value="투표하러 가기" className="btn" onClick={onClick}/>
+            <input type="button" value="투표하러 가기" className={btn} onClick={onClick}/>
             </form>
         </div>
     );

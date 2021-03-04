@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import {Link} from 'react-router-dom'
+import {useMediaQuery} from 'react-responsive'
 import 'react-calendar/dist/Calendar.css';
 import '../calendar.css';
 import axios from 'axios';
@@ -49,6 +50,11 @@ const ResultForManager = ({location}) => {
     const [projectTitle,] =useState(location.projectTitle);
 
     const [shareLink,] = useState('http://localhost:3000/share/'+getUUID());
+    const isMobile = useMediaQuery ({
+        query : "(max-width : 500px)"
+    })
+    const btn = isMobile? 'mBtn' : 'btn';
+    const logoText = isMobile? 'logoText' : 'pcLogoText';
 
     useEffect(async () =>{
         if(flag) setFlag(false);
@@ -134,28 +140,29 @@ const ResultForManager = ({location}) => {
 
     return (
         <div>
-        <BoxDescription icon={icon_plan} title={projectTitle}/>
-        
+            <BoxDescription icon={icon_plan} title={projectTitle}/>
+            
+            <div className='App'>
+                <div className={logoText}>우리 모두 일정 맞추기</div>
+                <img className='Applogo' src={yonal_logo}/>
+                
+                <h4 className='calendarTitle'>종합된 날짜</h4>
 
-        <div className='alignCenter'>
-            <div className='logoText'>우리 모두 일정 맞추기</div>
-            <img className='Applogo' src={yonal_logo}/>
+                <div className = 'marginTop'>
+                {isLoading ?
+                <Calendar className="calendar"
+                    value = {value}
+                    minDate = {value}
+                    tileClassName = {flag?tileClassName:"" } 
+                />
+                : "Loading"
+                }
+                </div>
 
-            <h3 className='calendarGuide'>종합된 날짜</h3>
-            <div>
-            {isLoading ?
-            <Calendar className="calendar"
-                value = {value}
-                minDate = {value}
-                tileClassName = {flag?tileClassName:"" } 
-            />
-            : "Loading"
-            }
+                <Link to={{pathname: './copylink', value: shareLink}}>
+                    <button className = {btn} onClick={fetchApi2} disabled={false}>결과 공유하기</button>
+                </Link>
             </div>
-            <Link to={{pathname: './copylink', value: shareLink}}>
-                <button className = 'btn' onClick={fetchApi2} disabled={false}>결과 공유하기</button>
-            </Link>
-        </div>
         </div>
     );
 

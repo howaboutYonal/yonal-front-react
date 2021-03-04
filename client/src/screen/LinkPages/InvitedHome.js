@@ -23,6 +23,8 @@ const InvitedHome = ({location, history}) => {
         query : "(max-width : 500px)"
     })
     const grayBackground = isMobile? 'mGrayBackground' : 'grayBackground';
+    const btn = isMobile? 'mBtn' : 'btn';
+    const logoText = isMobile? 'logoText' : 'pcLogoText';
         
     axios.post('http://localhost:5000/v1/get/link-data', {
         inviteLink: inviteLink
@@ -39,8 +41,8 @@ const InvitedHome = ({location, history}) => {
     
     return (
         <div className='App'>
-            
-            userImage
+            <div className={logoText}>우리 모두 일정 맞추기</div>
+            <img className='Applogo' src={yonal_logo}/>
             <div className={grayBackground}>
                 <BoxDescription icon={icon_plan} title="프로젝트 이름" content={projectTitle}/>
                 <BoxDescription icon={icon_people} title="현재 참여 인원" content={`${memberNum} 명`}/>
@@ -52,7 +54,7 @@ const InvitedHome = ({location, history}) => {
                     <button className = 'btn'>입장하기</button>
                 </Link> */}
 
-                <button className = 'btn' onClick={() => { 
+                <button className = {btn} onClick={() => { 
                     history.push({pathname: "/guest", projectId: projectId, projectTitle: projectTitle, startDate:startDate, endDate:endDate});
                 }}>입장하기</button>
                 

@@ -13,6 +13,7 @@ const LoginHome = ({location, history}) => {
     query : "(max-width : 500px)"
   })
   const projectStyle = isMobile? 'mNicknameGuide' : 'nicknameGuide';
+  const logoText = isMobile? 'logoText' : 'pcLogoText';
 
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const LoginHome = ({location, history}) => {
         </div>
 
         <div className='alignCenter'>
-          <div className='logoText'>우리 모두 일정 맞추기</div>
+          <div className={logoText}>우리 모두 일정 맞추기</div>
           <Link to={{pathname: './home', name:userName, email:userEmail, image:userImage}}>
             <img className='Applogo' src={yonal_logo}/>
           </Link>

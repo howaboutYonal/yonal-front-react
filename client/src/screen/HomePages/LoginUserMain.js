@@ -14,14 +14,22 @@ const LoginUserMain = props => {
         query : "(max-width : 500px)"
       })
     const projectStyle = isMobile? 'mProjectBox' : 'projectBox';
-    const ifGrid = isMobile? '' : 'grid';
+    const btn = isMobile? 'mBtn' : 'btn';
+    const logoText = isMobile? 'logoText' : 'pcLogoText';
 
     const projectList = myProjects.map(item => 
-        <div className={ifGrid}>
-            <Link to={{pathname:'./totalcal', projectId:item.id, projectTitle:item.name}}>
-                <button className={projectStyle}>{item.name}</button>
-            </Link>
-        </div>
+        isMobile?
+            <div>
+                <Link to={{pathname:'./totalcal', projectId:item.id, projectTitle:item.name}}>
+                    <button className={projectStyle}>{item.name}</button>
+                </Link>
+            </div>
+        :
+        <div className='App'>
+                <Link to={{pathname:'./totalcal', projectId:item.id, projectTitle:item.name}}>
+                    <button className={projectStyle}>{item.name}</button>
+                </Link>
+            </div>
     );
 
 
@@ -49,15 +57,28 @@ const LoginUserMain = props => {
     }   
 
     return (
+        isMobile?
         <div>
             <div><img className='profile' src={myImg}/></div>
             <Link to={{pathname: './create', email: myEmail}}>
-                <button className = 'btn'>새 프로젝트 만들기</button>
+                <button className = {btn}>새 프로젝트 만들기</button>
+            </Link>
+            
+            <div className={logoText}>내 프로젝트</div>
+            {projectList}
+        </div>
+        :
+        <div>
+            <div><img className='profile' src={myImg}/></div>
+            <Link to={{pathname: './create', email: myEmail}}>
+                <button className = {btn}>새 프로젝트 만들기</button>
             </Link>
             
             <div className='logoText'>내 프로젝트</div>
             {projectList}
         </div>
+        
+        
     );
 }
 

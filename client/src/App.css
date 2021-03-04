@@ -32,9 +32,23 @@
 }
 
 
+
 .logoText{
   position: relative;
   margin-top: 50px;
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: center;
+  
+  color: #000000;
+}
+
+.pcLogoText{
+  position: relative;
+  margin-top: 10px;
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: 500;
@@ -137,8 +151,8 @@
 
 }
 
-.btn {
-	background-color:#FF705D;
+.mBtn{
+  background-color:#FF705D;
   border-radius:15px;
   border: 0;
   color:#ffffff;
@@ -151,6 +165,22 @@
   left: 10%;
   text-align: center;
   bottom: 10%;
+}
+
+.btn {
+	background-color:#FF705D;
+  border-radius:15px;
+  border: 0;
+  color:#ffffff;
+  font-size:15px;
+  padding: 6px 33px;
+	text-decoration:none;
+
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  bottom: 5%;
 }
 
 .btn:hover {
@@ -168,7 +198,6 @@
 .loginGuide{
   text-align: center;
   margin: 30px 10px;
-  width: 80%;
   bottom: 50%;
 
   font-size: 18px;
@@ -194,18 +223,44 @@
   margin-top: 100px;
 }
 
-.grid{
-  display: grid;
+.mCreateForm{
+  text-align: left;
+  line-height: 26px;
+
+  width: 300px;
+  margin: auto;
+  bottom: 50%;
+}
+.createForm{
+  text-align: left;
+  line-height: 26px;
+
+  width: 300px;
+  margin: auto;
+  bottom: 50%;
 }
 
 .projectBox{
-  display: grid;
-  margin: 10px 10px;
+	text-decoration:none;
+  text-align: center;
+  margin: 6px 10px;
   width: 35%;
-  padding: 14px 10px;
+  padding: 6px 10px;
   border-radius: 13px;
   border: 0;
   font-size:15px;
+}
+
+.projectBox:hover {
+}
+
+.projectBox:active {
+	text-decoration:none;
+
+}
+.btprojectBoxn:focus {
+  border: 0;
+  outline: 0;
 }
 
 .mProjectBox{
@@ -250,12 +305,21 @@
 
 /*가능한 날짜를 선택해 주세요.*/
 .calendarGuide{
-
   text-align: left;
   margin-left: 5%;
+  
 }
 
+.calendarTitle{
+  width: max-content;
+  border-bottom: 5px solid red;
+  border-color: tomato;
+  margin: auto;
+}
 
+.marginTop{
+  margin-top: 10px;
+}
 /*input 박스*/
 .inputField{
   margin-top: 40%;

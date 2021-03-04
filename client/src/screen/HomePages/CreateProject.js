@@ -33,7 +33,9 @@ const CreateProject = ({location, history}) => {
     const isMobile = useMediaQuery ({
         query : "(max-width : 500px)"
     })
-    const boxStyle = isMobile? 'mNicknameGuide' : 'nicknameGuide';
+    const boxStyle = isMobile? 'mCreateForm' : 'createForm';
+    const logoText = isMobile? 'logoText' : 'pcLogoText';
+    const btn = isMobile? 'mBtn' : 'btn';
 
     useEffect(async () =>{
         await axios.post('http://localhost:5000/v1/get/userId', {
@@ -82,8 +84,9 @@ const CreateProject = ({location, history}) => {
 
     return (
         <div>
-            <div className='logoText'>우리 모두 일정 맞추기</div>
+            <div className={logoText}>우리 모두 일정 맞추기</div>
             <img className='Applogo' src={yonal_logo}/>  
+            <h4 className='calendarTitle'>프로젝트 만들기</h4>
 
             <div className={boxStyle}>
                 <TextField 
@@ -96,7 +99,7 @@ const CreateProject = ({location, history}) => {
                     onChange={(e) => setName(e.target.value)} 
                 />
 
-                <br></br>
+                <br/><br/>
                 <div className='period'>
                     시작 날짜
                     <form className={`classes.container`} noValidate>
@@ -113,6 +116,7 @@ const CreateProject = ({location, history}) => {
                             }}
                         />
                     </form>
+                    <br/>
                     종료 날짜
                     <form className={classes.container} noValidate>
                         <TextField
@@ -130,8 +134,7 @@ const CreateProject = ({location, history}) => {
                     </form>
                 </div>
             </div>
-
-            <button className = 'btn' onClick={onClick}>확인</button>
+            <button className = {btn} onClick={onClick}>확인</button>
 
         </div>
     );
