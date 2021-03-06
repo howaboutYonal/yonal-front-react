@@ -87,7 +87,7 @@ const ResultForGuest = () => {
         });
     }    
     async function fetchApi2(){
-        return axios.post('http://localhost:5000/v1/get/project-data-from-link',{shareLink:document.location.href}).then((res) => {console.log(res);return res.data});//.then((res) => {console.log(res)});
+        return axios.post('http://localhost:5000/v1/get/project-data-from-link',{shareLink:document.location.href}).then(res => res.data);
     }
     
     function tileClassName(params){

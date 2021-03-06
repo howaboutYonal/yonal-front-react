@@ -259,12 +259,14 @@ router.post('/create/project', async(req, res) =>{
 });
 
 router.post('/get/project-data', async (req, res) =>{
-    const project_id = req.body;
+    const {projectId} = req.body;
     try {
+
         const project_startenddate = await Project.findOne({
             attributes:['startDate','endDate'],
-            where:{projectId:project_id}
-        })
+            where:{projectId:projectId}
+        });
+
         if(!project_startenddate){
             return res.status(202).json({
                 code: 202,
@@ -287,11 +289,11 @@ router.post('/get/project-data', async (req, res) =>{
 
 // 프로젝트 매칭 결과 (req: project_id -> res: votedata, user)
 router.post('/get/project-result', async (req, res) =>{
-    const project_id = req.body;
+    const {projectId} = req.body;
     try {
         const projectuser_id_userid = await ProjectUser.findAndCountAll({
             attributes:['id', 'userId'],
-            where:{projectId: project_id, isManager:0}
+            where:{projectId: projectId, isManager:0}
         });
         if (!projectuser_id_userid){
             return res.status(202).json({
@@ -349,15 +351,12 @@ router.post('/save/project-userId-date', async(req,res) => {
             });
         }
     
-        // user가 앞서서 투표한 내용이 있으면 votedata 삭제해줘야함
-        result = VoteData.destroy({where:{id:projectuser_data.dataValues.id}});
         await Promise.all(date.map(async (x) =>{
             return await VoteData.create({id:projectuser_data.dataValues.id, date:x});
         }));
 
         return res.json({
-            code: 200,
-            payload: JSON.stringify(result),
+            code: 200
         });
     } catch (error) {
         console.error(error);
@@ -423,10 +422,6 @@ router.post('/link/new-user', async (req, res) => {
             raw:true
         });
 
-        console.log(projectuser);
-        console.log(projectuser.length)
-
-
         if(projectuser.length != 0){
             return res.status(202).json({
                 code: 202,
@@ -459,7 +454,7 @@ router.post('/link/new-user', async (req, res) => {
 
         return res.json({
             code: 200,
-            payload: JSON.stringify(new_project_user),
+            userId: new_project_user.dataValues.userId,
         });
 
     }catch (error) {
@@ -475,8 +470,6 @@ router.post('/link/new-user', async (req, res) => {
 router.post('/user', async (req, res)=>{
     try {
         const users = await ProjectUser.findAll();
-
-        console.log(users.length);
 
         return res.json({
             code: 200,

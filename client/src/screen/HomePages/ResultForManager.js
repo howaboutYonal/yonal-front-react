@@ -99,25 +99,22 @@ const ResultForManager = ({location}) => {
                 }
             ]
         }
-        console.log(totaljoint);
+
         return totaljoint;
     }
 
     async function fetchApi(){
         return axios.post('http://localhost:5000/v1/get/project-result', {projectId:projectId}).then(function (res) {
-            console.log(res);
             setWeight((select.length/res.data.count));
             return jointpars(res.data);
         });
     }
     async function fetchApi2(){
         var url = 'http://localhost:5000/v1/save/shareLink';
-        return axios.post(url, {projectId:location.projectId, shareLink:shareLink}).then(function (res) {
-            return res.data;
-        })
+        return axios.post(url, {projectId:location.projectId, shareLink:shareLink}).then(res => res.data);
     }
     async function fetchApi3(){
-        return axios.post('http://localhost:5000/v1/get/project-data',{project_id:projectId}).then((res) => {console.log(res);return res.data});//.then((res) => {console.log(res)});
+        return axios.post('http://localhost:5000/v1/get/project-data',{projectId:projectId}).then(res => res.data);
     }
 
     function tileClassName(params){

@@ -5,8 +5,8 @@ import BoxDescription from '../../component/BoxDescription'
 import icon_plan from '../../image/yonal_icon_plan.png'
 import axios from 'axios';
 
-function saveData(projectId, nickname) {
-    axios.post('http://localhost:5000/v1/link/new-user', {
+async function saveData(projectId, nickname) {
+    return await axios.post('http://localhost:5000/v1/link/new-user', {
         project_id:projectId,
         user_nickname:nickname
     });
@@ -23,19 +23,22 @@ const Guest = ({location, history}) => {
     const nicknameGuide = isMobile? 'mNicknameGuide' : 'nicknameGuide';
     const btn = isMobile? 'mBtn' : 'btn';
 
-    const onClick = () => {
+    const onClick = async () => {
         if(nickname == ''){
             alert("닉네임을 입력해주세요.");
         }else{
-            saveData(location.projectId, nickname);
-            history.push({
-                pathname: "/calendar", 
-                nickname:nickname, 
-                projectId: location.projectId, 
-                projectTitle:projectTitle, 
-                startDate:location.startDate, 
-                endDate:location.endDate
-            });
+            await saveData(location.projectId, nickname).then(res => 
+                history.push({
+                    pathname: "/calendar", 
+                    nickname:nickname, 
+                    projectId: location.projectId, 
+                    projectTitle:projectTitle, 
+                    startDate:location.startDate, 
+                    endDate:location.endDate,
+                    userId:res.data.userId
+                })
+            );
+
         }
     }
 

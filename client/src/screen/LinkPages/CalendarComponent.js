@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -24,18 +24,18 @@ const CalendarComponent = ({location, history}) => {
     const projectTitle = location.projectTitle;
     const startDate = location.startDate;
     const endDate = location.endDate;
+    const userId = location.userId;
     const isMobile = useMediaQuery ({
         query : "(max-width : 500px)"
     })
     const btn = isMobile? 'mBtn' : 'btn';
     const logoText = isMobile? 'logoText' : 'pcLogoText';
 
-    const [days, setDays] = useState([]);
-    const [value, ] = useState(new Date());
+    const [days, setDays] = useState([]); 
 
     function check_selected_days(nextValue){
         var flag = -1;
-        if(nextValue.valueOf() === value.valueOf()) return;
+        if(nextValue.valueOf() === startDate.valueOf()) return;
         for(var day in days){
             if(days[day].valueOf() === nextValue.valueOf()){
                 flag = day;
@@ -53,13 +53,12 @@ const CalendarComponent = ({location, history}) => {
     }
     
     const fetchApi = async() =>{
-        const res = await axios.post('http://localhost:5000/v1/save/project-userId-date',{
-            projectId : projectId,// for test
-            userId :2,// for test
+        await axios.post('http://localhost:5000/v1/save/project-userId-date',{
+            projectId : projectId,
+            userId :userId,
             date:days
         });
         history.push({pathname: "/voteFinished", nickname:nickname, projectTitle:projectTitle});
-        console.log(startDate,endDate,typeof(startDate), typeof(endDate));
     }
 
     function tileClassName(params){
@@ -92,9 +91,7 @@ const CalendarComponent = ({location, history}) => {
             />:'loading'
             }
 
-            <Link to='/totalcal'>
             <button className = {btn} onClick={fetchApi}>제출하기</button>
-            </Link>
         </div>
     );
 }
