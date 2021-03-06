@@ -108,6 +108,33 @@ router.post('/get/userId', async(req,res) =>{
     }
 });
 
+router.post('/get/project-data-from-link', async(req, res) =>{
+    const {shareLink} = req.body;
+    try {
+        const project_startenddate = await Project.findOne({
+            attributes:['startDate','endDate'],
+            where:{shareLink:shareLink}
+        })
+        if(!project_startenddate){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 캘린더입니다.'
+            })
+        }
+        return res.json({
+            code: 200,
+            startDate: project_startenddate.dataValues.startDate,
+            endDate:project_startenddate.dataValues.endDate
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
+
 // sharedLink로 프로젝트 매칭 결과 호출
 router.post('/get/project-result-from-link', async(req, res) =>{
     const {shareLink} = req.body;
@@ -221,6 +248,33 @@ router.post('/create/project', async(req, res) =>{
             code: 200,
             project: JSON.stringify(project_Data),
             projectuser: JSON.stringify(projectuser_Date)
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            code: 500,
+            message: '서버 에러',
+        });
+    }
+});
+
+router.post('/get/project-data', async (req, res) =>{
+    const project_id = req.body;
+    try {
+        const project_startenddate = await Project.findOne({
+            attributes:['startDate','endDate'],
+            where:{projectId:project_id}
+        })
+        if(!project_startenddate){
+            return res.status(202).json({
+                code: 202,
+                message: '존재하지 않는 캘린더입니다.'
+            })
+        }
+        return res.json({
+            code: 200,
+            startDate: project_startenddate.dataValues.startDate,
+            endDate:project_startenddate.dataValues.endDate
         });
     } catch (error) {
         console.error(error);

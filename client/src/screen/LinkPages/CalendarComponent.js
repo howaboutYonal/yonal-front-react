@@ -59,7 +59,7 @@ const CalendarComponent = ({location, history}) => {
             date:days
         });
         history.push({pathname: "/voteFinished", nickname:nickname, projectTitle:projectTitle});
-
+        console.log(startDate,endDate,typeof(startDate), typeof(endDate));
     }
 
     function tileClassName(params){
@@ -67,6 +67,12 @@ const CalendarComponent = ({location, history}) => {
             if(days.some(x => x.valueOf() === params.date.valueOf()))
                 return 'selected_day'
     }
+    function parse(str) {
+        var y = str.substr(0,4);
+        var m = str.substr(4,2);
+        var d = str.substr(6,2); 
+        return  new Date(y,m-1,d);
+    };
     
     return (
         <div>
@@ -76,13 +82,16 @@ const CalendarComponent = ({location, history}) => {
             <img className='Applogo' src={yonal_logo}/>
 
             <h3 className='calendarGuide'>가능한 날짜를 선택해 주세요.</h3>
+            {parse(startDate)?            
             <Calendar
                 className="calendar"
                 onChange={check_selected_days} 
-                value={value}
-                minDate={value}
+                minDate={parse(startDate.replaceAll('-',''))}
+                maxDate={parse(endDate.replaceAll('-',''))}
                 tileClassName={tileClassName}
-            />
+            />:'loading'
+            }
+
             <Link to='/totalcal'>
             <button className = {btn} onClick={fetchApi}>제출하기</button>
             </Link>

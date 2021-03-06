@@ -29,14 +29,19 @@ const ResultForGuest = () => {
     const select = [ classes0, classes1, classes2, classes3, classes4, classes5, classes6, classes7, classes8, classes9, classes10 ]
     const [weight, setWeight] = useState();
 
-    const [value, ] = useState(new Date());
     const [apiData, setApiData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [flag, setFlag] = useState(false);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] =useState('');
 
     useEffect(async () =>{
         if(flag) setFlag(false);
         setIsLoading(false);
+        await fetchApi2().then((res) =>{
+            setStartDate(res.startDate);
+            setEndDate(res.endDate);
+        });
         await fetchApi().then(res => setApiData(res)).then(setIsLoading(true));
     },[]);
     useEffect(()=>{
@@ -81,6 +86,9 @@ const ResultForGuest = () => {
             return jointpars(res.data);
         });
     }    
+    async function fetchApi2(){
+        return axios.post('http://localhost:5000/v1/get/project-data-from-link',{shareLink:document.location.href}).then((res) => {console.log(res);return res.data});//.then((res) => {console.log(res)});
+    }
     
     function tileClassName(params){
         if(!(apiData.length===0)){
@@ -106,10 +114,10 @@ const ResultForGuest = () => {
         <div>
             <h3 className='calendarGuide'>종합된 날짜</h3>
             <div>
-            {isLoading ?
+            {isLoading&&startDate ?
             <Calendar className="calendar"
-                value = {value}
-                minDate = {value}
+                minDate={parse(startDate.replaceAll('-',''))}
+                maxDate={parse(endDate.replaceAll('-',''))}
                 tileClassName = {flag?tileClassName:"" } 
             />
             : "Loading"
