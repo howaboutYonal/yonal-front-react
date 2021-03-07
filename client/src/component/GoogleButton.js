@@ -32,7 +32,7 @@ const GoogleButton = ({sendData , history}) => {
     const onFailure = (error) => {
         console.log(error);
         sendData(null, null, null, false);
-        history.push({pathname: "./homepage"});
+        history.push({pathname: "./loginpage"});
     }
 
     return(
