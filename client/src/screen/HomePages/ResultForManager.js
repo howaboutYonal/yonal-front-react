@@ -21,12 +21,12 @@ const rgbHex = require('rgb-hex');
 
 function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 3 | 8);
+      var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 3 | 8);
       return v.toString(16);
     });
 }
 
-const ResultForManager = ({location}) => {
+const ResultForManager = ({location, history}) => {
     let classes0 = useStyles({ backgroundColor: '#'+rgbHex(40,75,114, 0)});
     let classes1 = useStyles({ backgroundColor: '#'+rgbHex(40,75,114, 0.1)});
     let classes2 = useStyles({ backgroundColor: '#'+rgbHex(40,75,114, 0.2)});
@@ -111,7 +111,8 @@ const ResultForManager = ({location}) => {
     }
     async function fetchApi2(){
         var url = 'http://localhost:5000/v1/save/shareLink';
-        return axios.post(url, {projectId:location.projectId, shareLink:shareLink}).then(res => res.data);
+        axios.post(url, {projectId:location.projectId, shareLink:shareLink}).then(res => res.data);
+        history.push({pathname: "/copylink", Link: shareLink});;
     }
     async function fetchApi3(){
         return axios.post('http://localhost:5000/v1/get/project-data',{projectId:projectId}).then(res => res.data);
@@ -138,9 +139,9 @@ const ResultForManager = ({location}) => {
     }
 
 
-    const userName = localStorage.getItem("userName");
-    const userEmail = localStorage.getItem("userEmail");
-    const userImage = localStorage.getItem("userImage");
+    // const userName = localStorage.getItem("userName");
+    // const userEmail = localStorage.getItem("userEmail");
+    // const userImage = localStorage.getItem("userImage");
 
     return (
         <div>
@@ -163,9 +164,9 @@ const ResultForManager = ({location}) => {
                 }
                 </div>
 
-                <Link to={{pathname: './copylink', value: shareLink}}>
+                {/* <Link to={{pathname: './copylink', value: shareLink}}> */}
                     <button className = {btn} onClick={fetchApi2} disabled={false}>결과 공유하기</button>
-                </Link>
+                {/* </Link> */}
             </div>
         </div>
     );

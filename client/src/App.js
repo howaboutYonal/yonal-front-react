@@ -7,7 +7,7 @@ import Guest from './screen/LinkPages/Guest';
 import CalendarComponent from './screen/LinkPages/CalendarComponent';
 import VoteFinished from './screen/LinkPages/VoteFinished';
 import ResultForGuest from './screen/LinkPages/ResultForGuest';
-import LoginUserMain from './screen/HomePages/LoginUserMain';
+// import LoginUserMain from './screen/HomePages/LoginUserMain';
 import CreateProject from './screen/HomePages/CreateProject';
 import CopyLink from './screen/HomePages/CopyLink';
 import ResultForManager from './screen/HomePages/ResultForManager';

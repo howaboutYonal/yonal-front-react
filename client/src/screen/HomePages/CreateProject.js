@@ -46,7 +46,7 @@ const CreateProject = ({location, history}) => {
     },[])
 
     const fetchApi = async() => {
-        const res = await axios.post('http://localhost:5000/v1/create/project', {
+        await axios.post('http://localhost:5000/v1/create/project', {
             name:name,
             userId:myId,
             startDate:startDate,
@@ -60,7 +60,7 @@ const CreateProject = ({location, history}) => {
             alert("프로젝트 이름을 입력해주세요.");
         }else{
             fetchApi();
-            history.push({pathname: "/copylink", inviteLink: inviteLink});
+            history.push({pathname: "/copylink", Link: inviteLink});
         }
     }
 
@@ -77,7 +77,7 @@ const CreateProject = ({location, history}) => {
     
     function getUUID() { // UUID v4 generator in JavaScript (RFC4122 compliant)
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 3 | 8);
+          var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 3 | 8);
           return v.toString(16);
         });
     }
