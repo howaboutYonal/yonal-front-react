@@ -40,7 +40,7 @@ const HomePage2 = ({history}) => {
   return (
   <div>
       <div className='logoText'>우리 모두 일정 맞추기</div>
-      <Link to={{pathname: '../'}}>
+      <Link to={{pathname: './loginpage'}}>
         <img className='Applogo' src={yonal_logo}/>  
       </Link>
       <GoogleButton className = 'googleBtn' sendData={(e) => sendData}/>

@@ -35,7 +35,7 @@ const LoginHome = ({location, history}) => {
 
         <div className='alignCenter'>
           <div className={logoText}>우리 모두 일정 맞추기</div>
-          <Link to={{pathname: './home', name:userName, email:userEmail, image:userImage}}>
+          <Link to={{pathname: './loginhome', name:userName, email:userEmail, image:userImage}}>
             <img className='Applogo' src={yonal_logo}/>
           </Link>
           <LoginUserMain name={userName} email={userEmail} image={userImage}/>
