@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import {Link, withRouter} from 'react-router-dom'
 import yonal_logo from '../image/yonal_logo.png'
 import GoogleButton from '../component/GoogleButton'
-// import {useMediaQuery} from 'react-responsive'
 
-const HomePage2 = ({history}) => {
+const HomePage = ({history}) => {
   const [, setIsLogin] = useState(null);
   const [, setUserName] = useState(null);
   const [, setUserEmail] = useState(null);
@@ -16,19 +15,6 @@ const HomePage2 = ({history}) => {
     setUserEmail(email);
     setUserImage(image);
   };
-
-  // const Logout = () => {
-  //   setIsLogin(false);
-  //   setUserName(null);
-  //   setUserEmail(null);
-  //   setUserImage(null);
-  // };
-
-  // const isMobile = useMediaQuery ({
-  //   query : "(max-width : 500px)"
-  // })
-
-  // const nicknameGuide = isMobile? 'mNicknameGuide' : 'nicknameGuide';
 
   if(localStorage.getItem("userName")){
     history.push({
@@ -50,4 +36,4 @@ const HomePage2 = ({history}) => {
   );
 }
 
-export default withRouter(HomePage2);
+export default withRouter(HomePage);

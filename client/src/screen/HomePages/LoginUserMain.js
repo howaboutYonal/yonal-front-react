@@ -4,9 +4,7 @@ import {useMediaQuery} from 'react-responsive'
 import axios from 'axios'
 
 const LoginUserMain = props => {
-    console.log("lo0cation", props);
 
-    //const myName = props.name;
     const myEmail = props.email;
     const myImg = props.image;
     const [myProjects, setMyProjects] = useState([]);
@@ -31,10 +29,6 @@ const LoginUserMain = props => {
                 </Link>
             </div>
     );
-
-
-
-
       
     function copyData(arr) {
         const temp = [];

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import yonal_logo from '../image/yonal_logo.png'
 import LoginUserMain from './HomePages/LoginUserMain'
 import {useMediaQuery} from 'react-responsive'
 
-const LoginHome = ({location, history}) => {
+const LoginHome = () => {
   const [isLogin, setIsLogin] = useState(null);
   const [userName, setUserName] = useState(localStorage.getItem("userName") || null);
   const [userEmail, setUserEmail] = useState(localStorage.getItem("userEmail") || null);
@@ -23,7 +23,6 @@ const LoginHome = ({location, history}) => {
   const Logout = () => {
     localStorage.clear();
   };
-
 
   return (
       <div>

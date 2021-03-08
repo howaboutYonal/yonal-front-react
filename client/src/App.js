@@ -11,13 +11,13 @@ import ResultForGuest from './screen/LinkPages/ResultForGuest';
 import CreateProject from './screen/HomePages/CreateProject';
 import CopyLink from './screen/HomePages/CopyLink';
 import ResultForManager from './screen/HomePages/ResultForManager';
-import HomePage2 from './screen/HomePage2';
+import HomePage from './screen/HomePage';
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Route path="/loginpage" component={HomePage2}/>
+      <Route path="/loginpage" component={HomePage}/>
       <Route path="/loginhome" component={LoginHome}/>
       <Route path="/invite" component={InvitedHome}/>
       <Route path="/guest/" component={Guest}/>

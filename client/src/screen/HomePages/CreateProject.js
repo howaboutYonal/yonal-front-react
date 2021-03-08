@@ -7,8 +7,6 @@ import TextField from '@material-ui/core/TextField'
 import leadingZeros from 'leadingzero'
 import yonal_logo from '../../image/yonal_logo.png'
 
-// projectUser테이블에 관계추가하는 api생성 후 추가할 예정(isManager=1)
-
 const useStyles = makeStyles((theme) => ({
     container: {
       display: 'flex',
@@ -30,9 +28,11 @@ const CreateProject = ({location, history}) => {
     const [startDate, setStartDate] = useState(getTimeStamp());
     const [endDate, setEndDate] = useState(getTimeStamp());
     const [inviteLink, ] = useState('http://localhost:3000/invite/'+getUUID());
+
     const isMobile = useMediaQuery ({
         query : "(max-width : 500px)"
     })
+
     const boxStyle = isMobile? 'mCreateForm' : 'createForm';
     const logoText = isMobile? 'logoText' : 'pcLogoText';
     const btn = isMobile? 'mBtn' : 'btn';
@@ -135,7 +135,6 @@ const CreateProject = ({location, history}) => {
                 </div>
             </div>
             <button className = {btn} onClick={onClick}>확인</button>
-
         </div>
     );
 }

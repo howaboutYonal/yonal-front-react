@@ -3,6 +3,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {useMediaQuery} from 'react-responsive'
 
 const CopyLink = ({location}) => {
+
     const url = location.Link;
     const isMobile = useMediaQuery ({
         query : "(max-width : 500px)"
