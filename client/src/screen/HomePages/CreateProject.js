@@ -27,7 +27,7 @@ const CreateProject = ({location, history}) => {
     const [name, setName] = useState(null);
     const [startDate, setStartDate] = useState(getTimeStamp());
     const [endDate, setEndDate] = useState(getTimeStamp());
-    const [inviteLink, ] = useState('http://localhost:3000/invite/'+getUUID());
+    const [inviteLink, ] = useState('https://yonals.net/invite/'+getUUID());
 
     const isMobile = useMediaQuery ({
         query : "(max-width : 500px)"

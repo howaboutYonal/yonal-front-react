@@ -50,7 +50,7 @@ const ResultForManager = ({location, history}) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] =useState('');
 
-    const [shareLink,] = useState('http://localhost:3000/share/'+getUUID());
+    const [shareLink,] = useState('https://yonals.net/share/'+getUUID());
     const isMobile = useMediaQuery ({
         query : "(max-width : 500px)"
     })
